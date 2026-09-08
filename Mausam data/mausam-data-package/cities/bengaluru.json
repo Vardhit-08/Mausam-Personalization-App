@@ -1,0 +1,144 @@
+{
+  "cityId": "bengaluru",
+  "cityName": "Bengaluru",
+  "state": "Karnataka",
+  "coordinates": {
+    "lat": 12.97,
+    "lon": 77.59
+  },
+  "lastUpdated": "2026-09-06T21:30:00+05:30",
+  "current": {
+    "temperature": 23.7,
+    "feelsLike": 25.2,
+    "minTemp": 19.0,
+    "maxTemp": 27.5,
+    "humidity": 76,
+    "condition": "Clear Sky",
+    "conditionIcon": "clear-sky",
+    "wind": {
+      "speedKmh": 13.9,
+      "direction": "NW"
+    },
+    "rain": {
+      "probability": 51,
+      "amountMm": 1.9
+    },
+    "airQuality": {
+      "aqi": 70,
+      "category": "Satisfactory",
+      "dominantPollutant": "PM10"
+    },
+    "pollen": {
+      "level": "Moderate",
+      "index": 4
+    },
+    "uvIndex": {
+      "value": 7,
+      "category": "High"
+    }
+  },
+  "sun": {
+    "sunrise": "06:06",
+    "sunset": "18:31"
+  },
+  "moon": {
+    "moonrise": "00:52",
+    "moonset": "14:48",
+    "phase": "Waning Gibbous"
+  },
+  "alerts": [],
+  "hourlyForecast": [
+    {
+      "date": "07 September",
+      "time": "11:30",
+      "temperature": 22.6,
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "rainProbability": 46,
+      "humidity": 79
+    },
+    {
+      "date": "07 September",
+      "time": "14:30",
+      "temperature": 23.4,
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "rainProbability": 61,
+      "humidity": 86
+    },
+    {
+      "date": "07 September",
+      "time": "17:30",
+      "temperature": 25.4,
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "rainProbability": 46,
+      "humidity": 78
+    }
+  ],
+  "dailyForecast": [
+    {
+      "date": "06/09",
+      "day": "Today",
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "minTemp": 19.5,
+      "maxTemp": 28.4,
+      "rainProbability": 52
+    },
+    {
+      "date": "07/09",
+      "day": "Sunday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 18.4,
+      "maxTemp": 27.6,
+      "rainProbability": 58
+    },
+    {
+      "date": "08/09",
+      "day": "Monday",
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "minTemp": 18.4,
+      "maxTemp": 27.4,
+      "rainProbability": 59
+    },
+    {
+      "date": "09/09",
+      "day": "Tuesday",
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "minTemp": 19.6,
+      "maxTemp": 28.6,
+      "rainProbability": 46
+    },
+    {
+      "date": "10/09",
+      "day": "Wednesday",
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "minTemp": 19.3,
+      "maxTemp": 27.6,
+      "rainProbability": 47
+    },
+    {
+      "date": "11/09",
+      "day": "Thursday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 19.9,
+      "maxTemp": 28.5,
+      "rainProbability": 58
+    },
+    {
+      "date": "12/09",
+      "day": "Friday",
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "minTemp": 19.0,
+      "maxTemp": 26.6,
+      "rainProbability": 46
+    }
+  ]
+}

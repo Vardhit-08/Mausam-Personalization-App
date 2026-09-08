@@ -1,0 +1,151 @@
+{
+  "cityId": "mumbai",
+  "cityName": "Mumbai",
+  "state": "Maharashtra",
+  "coordinates": {
+    "lat": 19.08,
+    "lon": 72.88
+  },
+  "lastUpdated": "2026-09-06T21:30:00+05:30",
+  "current": {
+    "temperature": 28.1,
+    "feelsLike": 29.6,
+    "minTemp": 24.5,
+    "maxTemp": 32.0,
+    "humidity": 77,
+    "condition": "Light Rain",
+    "conditionIcon": "rain",
+    "wind": {
+      "speedKmh": 12.5,
+      "direction": "SE"
+    },
+    "rain": {
+      "probability": 82,
+      "amountMm": 7.8
+    },
+    "airQuality": {
+      "aqi": 108,
+      "category": "Moderate",
+      "dominantPollutant": "PM2.5"
+    },
+    "pollen": {
+      "level": "Moderate",
+      "index": 4
+    },
+    "uvIndex": {
+      "value": 6,
+      "category": "High"
+    }
+  },
+  "sun": {
+    "sunrise": "06:25",
+    "sunset": "18:50"
+  },
+  "moon": {
+    "moonrise": "01:11",
+    "moonset": "15:07",
+    "phase": "Waning Gibbous"
+  },
+  "alerts": [
+    {
+      "type": "Heavy Rain Alert",
+      "severity": "amber",
+      "message": "Heavy rainfall is expected in and around Mumbai over the next 24 hours.",
+      "issuedBy": "IMD Regional Meteorological Centre"
+    }
+  ],
+  "hourlyForecast": [
+    {
+      "date": "07 September",
+      "time": "11:30",
+      "temperature": 28.6,
+      "condition": "Thunderstorm",
+      "conditionIcon": "thunderstorm",
+      "rainProbability": 50,
+      "humidity": 78
+    },
+    {
+      "date": "07 September",
+      "time": "14:30",
+      "temperature": 27.6,
+      "condition": "Thunderstorm",
+      "conditionIcon": "thunderstorm",
+      "rainProbability": 72,
+      "humidity": 87
+    },
+    {
+      "date": "07 September",
+      "time": "17:30",
+      "temperature": 25.7,
+      "condition": "Moderate Rain",
+      "conditionIcon": "rain",
+      "rainProbability": 72,
+      "humidity": 74
+    }
+  ],
+  "dailyForecast": [
+    {
+      "date": "06/09",
+      "day": "Today",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 23.8,
+      "maxTemp": 31.6,
+      "rainProbability": 62
+    },
+    {
+      "date": "07/09",
+      "day": "Sunday",
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "minTemp": 24.9,
+      "maxTemp": 33.0,
+      "rainProbability": 62
+    },
+    {
+      "date": "08/09",
+      "day": "Monday",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 25.1,
+      "maxTemp": 32.9,
+      "rainProbability": 63
+    },
+    {
+      "date": "09/09",
+      "day": "Tuesday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 23.6,
+      "maxTemp": 33.2,
+      "rainProbability": 83
+    },
+    {
+      "date": "10/09",
+      "day": "Wednesday",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 24.9,
+      "maxTemp": 31.1,
+      "rainProbability": 67
+    },
+    {
+      "date": "11/09",
+      "day": "Thursday",
+      "condition": "Moderate Rain",
+      "conditionIcon": "rain",
+      "minTemp": 25.3,
+      "maxTemp": 32.4,
+      "rainProbability": 63
+    },
+    {
+      "date": "12/09",
+      "day": "Friday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 23.8,
+      "maxTemp": 32.7,
+      "rainProbability": 63
+    }
+  ]
+}

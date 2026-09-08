@@ -1,0 +1,151 @@
+{
+  "cityId": "guwahati",
+  "cityName": "Guwahati",
+  "state": "Assam",
+  "coordinates": {
+    "lat": 26.15,
+    "lon": 91.75
+  },
+  "lastUpdated": "2026-09-06T21:30:00+05:30",
+  "current": {
+    "temperature": 27.7,
+    "feelsLike": 29.2,
+    "minTemp": 25.0,
+    "maxTemp": 31.5,
+    "humidity": 92,
+    "condition": "Thunderstorm",
+    "conditionIcon": "thunderstorm",
+    "wind": {
+      "speedKmh": 7.9,
+      "direction": "NW"
+    },
+    "rain": {
+      "probability": 57,
+      "amountMm": 6.7
+    },
+    "airQuality": {
+      "aqi": 86,
+      "category": "Satisfactory",
+      "dominantPollutant": "PM10"
+    },
+    "pollen": {
+      "level": "Moderate",
+      "index": 4
+    },
+    "uvIndex": {
+      "value": 7,
+      "category": "High"
+    }
+  },
+  "sun": {
+    "sunrise": "05:09",
+    "sunset": "17:34"
+  },
+  "moon": {
+    "moonrise": "23:55",
+    "moonset": "13:51",
+    "phase": "Waning Gibbous"
+  },
+  "alerts": [
+    {
+      "type": "Heavy Rain Alert",
+      "severity": "amber",
+      "message": "Heavy rainfall is expected in and around Guwahati over the next 24 hours.",
+      "issuedBy": "IMD Regional Meteorological Centre"
+    }
+  ],
+  "hourlyForecast": [
+    {
+      "date": "07 September",
+      "time": "11:30",
+      "temperature": 29.3,
+      "condition": "Thunderstorm",
+      "conditionIcon": "thunderstorm",
+      "rainProbability": 66,
+      "humidity": 100
+    },
+    {
+      "date": "07 September",
+      "time": "14:30",
+      "temperature": 27.3,
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "rainProbability": 66,
+      "humidity": 93
+    },
+    {
+      "date": "07 September",
+      "time": "17:30",
+      "temperature": 26.9,
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "rainProbability": 65,
+      "humidity": 93
+    }
+  ],
+  "dailyForecast": [
+    {
+      "date": "06/09",
+      "day": "Today",
+      "condition": "Thunderstorm",
+      "conditionIcon": "thunderstorm",
+      "minTemp": 25.4,
+      "maxTemp": 30.8,
+      "rainProbability": 62
+    },
+    {
+      "date": "07/09",
+      "day": "Sunday",
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "minTemp": 24.2,
+      "maxTemp": 30.6,
+      "rainProbability": 78
+    },
+    {
+      "date": "08/09",
+      "day": "Monday",
+      "condition": "Moderate Rain",
+      "conditionIcon": "rain",
+      "minTemp": 25.1,
+      "maxTemp": 32.3,
+      "rainProbability": 61
+    },
+    {
+      "date": "09/09",
+      "day": "Tuesday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 24.4,
+      "maxTemp": 31.5,
+      "rainProbability": 79
+    },
+    {
+      "date": "10/09",
+      "day": "Wednesday",
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "minTemp": 25.0,
+      "maxTemp": 30.8,
+      "rainProbability": 81
+    },
+    {
+      "date": "11/09",
+      "day": "Thursday",
+      "condition": "Moderate Rain",
+      "conditionIcon": "rain",
+      "minTemp": 24.4,
+      "maxTemp": 30.7,
+      "rainProbability": 64
+    },
+    {
+      "date": "12/09",
+      "day": "Friday",
+      "condition": "Thunderstorm",
+      "conditionIcon": "thunderstorm",
+      "minTemp": 24.0,
+      "maxTemp": 31.6,
+      "rainProbability": 56
+    }
+  ]
+}

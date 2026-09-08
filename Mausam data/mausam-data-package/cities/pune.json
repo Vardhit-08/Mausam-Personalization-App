@@ -1,0 +1,144 @@
+{
+  "cityId": "pune",
+  "cityName": "Pune",
+  "state": "Maharashtra",
+  "coordinates": {
+    "lat": 18.52,
+    "lon": 73.86
+  },
+  "lastUpdated": "2026-09-06T21:30:00+05:30",
+  "current": {
+    "temperature": 24.1,
+    "feelsLike": 25.6,
+    "minTemp": 21.0,
+    "maxTemp": 29.0,
+    "humidity": 77,
+    "condition": "Light Rain",
+    "conditionIcon": "rain",
+    "wind": {
+      "speedKmh": 11.6,
+      "direction": "E"
+    },
+    "rain": {
+      "probability": 69,
+      "amountMm": 7.7
+    },
+    "airQuality": {
+      "aqi": 107,
+      "category": "Moderate",
+      "dominantPollutant": "PM2.5"
+    },
+    "pollen": {
+      "level": "Moderate",
+      "index": 4
+    },
+    "uvIndex": {
+      "value": 7,
+      "category": "High"
+    }
+  },
+  "sun": {
+    "sunrise": "06:21",
+    "sunset": "18:46"
+  },
+  "moon": {
+    "moonrise": "01:07",
+    "moonset": "15:03",
+    "phase": "Waning Gibbous"
+  },
+  "alerts": [],
+  "hourlyForecast": [
+    {
+      "date": "07 September",
+      "time": "11:30",
+      "temperature": 26.5,
+      "condition": "Moderate Rain",
+      "conditionIcon": "rain",
+      "rainProbability": 55,
+      "humidity": 72
+    },
+    {
+      "date": "07 September",
+      "time": "14:30",
+      "temperature": 25.6,
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "rainProbability": 59,
+      "humidity": 69
+    },
+    {
+      "date": "07 September",
+      "time": "17:30",
+      "temperature": 23.1,
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "rainProbability": 59,
+      "humidity": 83
+    }
+  ],
+  "dailyForecast": [
+    {
+      "date": "06/09",
+      "day": "Today",
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "minTemp": 20.5,
+      "maxTemp": 29.2,
+      "rainProbability": 66
+    },
+    {
+      "date": "07/09",
+      "day": "Sunday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 21.4,
+      "maxTemp": 29.5,
+      "rainProbability": 69
+    },
+    {
+      "date": "08/09",
+      "day": "Monday",
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "minTemp": 20.5,
+      "maxTemp": 29.4,
+      "rainProbability": 54
+    },
+    {
+      "date": "09/09",
+      "day": "Tuesday",
+      "condition": "Thunderstorm",
+      "conditionIcon": "thunderstorm",
+      "minTemp": 20.9,
+      "maxTemp": 28.9,
+      "rainProbability": 61
+    },
+    {
+      "date": "10/09",
+      "day": "Wednesday",
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "minTemp": 21.5,
+      "maxTemp": 29.0,
+      "rainProbability": 65
+    },
+    {
+      "date": "11/09",
+      "day": "Thursday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 20.6,
+      "maxTemp": 29.4,
+      "rainProbability": 51
+    },
+    {
+      "date": "12/09",
+      "day": "Friday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 20.3,
+      "maxTemp": 29.8,
+      "rainProbability": 69
+    }
+  ]
+}

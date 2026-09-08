@@ -1,0 +1,144 @@
+{
+  "cityId": "bhopal",
+  "cityName": "Bhopal",
+  "state": "Madhya Pradesh",
+  "coordinates": {
+    "lat": 23.26,
+    "lon": 77.41
+  },
+  "lastUpdated": "2026-09-06T21:30:00+05:30",
+  "current": {
+    "temperature": 26.1,
+    "feelsLike": 26.4,
+    "minTemp": 23.0,
+    "maxTemp": 31.5,
+    "humidity": 62,
+    "condition": "Generally Cloudy",
+    "conditionIcon": "cloudy",
+    "wind": {
+      "speedKmh": 13.4,
+      "direction": "NE"
+    },
+    "rain": {
+      "probability": 52,
+      "amountMm": 1.3
+    },
+    "airQuality": {
+      "aqi": 111,
+      "category": "Moderate",
+      "dominantPollutant": "PM2.5"
+    },
+    "pollen": {
+      "level": "Very High",
+      "index": 9
+    },
+    "uvIndex": {
+      "value": 8,
+      "category": "Very High"
+    }
+  },
+  "sun": {
+    "sunrise": "06:07",
+    "sunset": "18:32"
+  },
+  "moon": {
+    "moonrise": "00:53",
+    "moonset": "14:49",
+    "phase": "Waning Gibbous"
+  },
+  "alerts": [],
+  "hourlyForecast": [
+    {
+      "date": "07 September",
+      "time": "11:30",
+      "temperature": 26.5,
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "rainProbability": 38,
+      "humidity": 64
+    },
+    {
+      "date": "07 September",
+      "time": "14:30",
+      "temperature": 28.1,
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "rainProbability": 54,
+      "humidity": 70
+    },
+    {
+      "date": "07 September",
+      "time": "17:30",
+      "temperature": 25.1,
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "rainProbability": 46,
+      "humidity": 61
+    }
+  ],
+  "dailyForecast": [
+    {
+      "date": "06/09",
+      "day": "Today",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 23.5,
+      "maxTemp": 32.6,
+      "rainProbability": 52
+    },
+    {
+      "date": "07/09",
+      "day": "Sunday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 23.5,
+      "maxTemp": 31.6,
+      "rainProbability": 50
+    },
+    {
+      "date": "08/09",
+      "day": "Monday",
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "minTemp": 22.4,
+      "maxTemp": 31.3,
+      "rainProbability": 47
+    },
+    {
+      "date": "09/09",
+      "day": "Tuesday",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 22.7,
+      "maxTemp": 32.0,
+      "rainProbability": 58
+    },
+    {
+      "date": "10/09",
+      "day": "Wednesday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 22.3,
+      "maxTemp": 31.4,
+      "rainProbability": 54
+    },
+    {
+      "date": "11/09",
+      "day": "Thursday",
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "minTemp": 23.1,
+      "maxTemp": 32.7,
+      "rainProbability": 37
+    },
+    {
+      "date": "12/09",
+      "day": "Friday",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 23.3,
+      "maxTemp": 30.4,
+      "rainProbability": 40
+    }
+  ]
+}

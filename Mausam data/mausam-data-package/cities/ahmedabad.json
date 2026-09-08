@@ -1,0 +1,144 @@
+{
+  "cityId": "ahmedabad",
+  "cityName": "Ahmedabad",
+  "state": "Gujarat",
+  "coordinates": {
+    "lat": 23.02,
+    "lon": 72.57
+  },
+  "lastUpdated": "2026-09-06T21:30:00+05:30",
+  "current": {
+    "temperature": 32.2,
+    "feelsLike": 32.5,
+    "minTemp": 27.0,
+    "maxTemp": 36.0,
+    "humidity": 64,
+    "condition": "Haze",
+    "conditionIcon": "mist",
+    "wind": {
+      "speedKmh": 13.8,
+      "direction": "NW"
+    },
+    "rain": {
+      "probability": 36,
+      "amountMm": 1.9
+    },
+    "airQuality": {
+      "aqi": 124,
+      "category": "Moderate",
+      "dominantPollutant": "PM2.5"
+    },
+    "pollen": {
+      "level": "Very High",
+      "index": 9
+    },
+    "uvIndex": {
+      "value": 8,
+      "category": "Very High"
+    }
+  },
+  "sun": {
+    "sunrise": "06:26",
+    "sunset": "18:51"
+  },
+  "moon": {
+    "moonrise": "01:12",
+    "moonset": "15:08",
+    "phase": "Waning Gibbous"
+  },
+  "alerts": [],
+  "hourlyForecast": [
+    {
+      "date": "07 September",
+      "time": "11:30",
+      "temperature": 34.6,
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "rainProbability": 15,
+      "humidity": 60
+    },
+    {
+      "date": "07 September",
+      "time": "14:30",
+      "temperature": 31.9,
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "rainProbability": 22,
+      "humidity": 62
+    },
+    {
+      "date": "07 September",
+      "time": "17:30",
+      "temperature": 31.1,
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "rainProbability": 46,
+      "humidity": 71
+    }
+  ],
+  "dailyForecast": [
+    {
+      "date": "06/09",
+      "day": "Today",
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "minTemp": 26.7,
+      "maxTemp": 34.6,
+      "rainProbability": 30
+    },
+    {
+      "date": "07/09",
+      "day": "Sunday",
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "minTemp": 27.2,
+      "maxTemp": 37.5,
+      "rainProbability": 28
+    },
+    {
+      "date": "08/09",
+      "day": "Monday",
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "minTemp": 27.2,
+      "maxTemp": 35.5,
+      "rainProbability": 38
+    },
+    {
+      "date": "09/09",
+      "day": "Tuesday",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 27.2,
+      "maxTemp": 36.0,
+      "rainProbability": 43
+    },
+    {
+      "date": "10/09",
+      "day": "Wednesday",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 26.4,
+      "maxTemp": 34.6,
+      "rainProbability": 25
+    },
+    {
+      "date": "11/09",
+      "day": "Thursday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 27.0,
+      "maxTemp": 36.9,
+      "rainProbability": 36
+    },
+    {
+      "date": "12/09",
+      "day": "Friday",
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "minTemp": 26.9,
+      "maxTemp": 37.3,
+      "rainProbability": 44
+    }
+  ]
+}
