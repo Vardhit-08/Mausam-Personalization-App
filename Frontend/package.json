@@ -7,6 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "test:auth": "node test-auth-model.js",
+    "test:indices": "node test-indices.js",
+    "test:prioritization": "node test-prioritization.js",
+    "test:notifications": "node test-notifications.js",
+    "test:a11y": "node test-a11y-regression.js",
+    "test": "node test-auth-model.js && node test-indices.js && node test-prioritization.js && node test-notifications.js && node test-a11y-regression.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },

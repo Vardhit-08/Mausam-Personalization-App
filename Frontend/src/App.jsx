@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './auth/AuthContext';
+import SplashLoader from './components/SplashLoader';
 import {
   RootRoute,
   PublicOnlyRoute,
@@ -16,6 +17,27 @@ import PersonaPage from './pages/PersonaPage';
 import DashboardPage from './pages/DashboardPage';
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(() => {
+    try {
+      return !sessionStorage.getItem('mausam_entry_splash_seen');
+    } catch {
+      return false;
+    }
+  });
+
+  const handleSplashDone = () => {
+    try {
+      sessionStorage.setItem('mausam_entry_splash_seen', 'true');
+    } catch (e) {
+      console.warn('Session storage write error', e);
+    }
+    setShowSplash(false);
+  };
+
+  if (showSplash) {
+    return <SplashLoader onComplete={handleSplashDone} />;
+  }
+
   return (
     <AuthProvider>
       <BrowserRouter>

@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { AUTH_STATES } from '../auth/authStorage';
 import ProfileModal from './ProfileModal';
-import { CloudSun, User, LogOut, HeartPulse, Wheat, ShieldCheck } from 'lucide-react';
+import imdLogo from '../assets/branding/imd-logo.png';
+import { User, LogOut, HeartPulse, Wheat, Activity, Compass, Car } from 'lucide-react';
 
 export default function Navbar() {
   const { authState, currentUser, persona, logout } = useAuth();
@@ -18,38 +19,63 @@ export default function Navbar() {
 
   const isAuth = authState === AUTH_STATES.AUTHENTICATED || authState === AUTH_STATES.AUTHENTICATED_NO_PERSONA;
 
+  const getPersonaBadge = (p) => {
+    switch (p) {
+      case 'fitness':
+        return (
+          <div className="persona-badge persona-fitness" id="nav-persona-badge">
+            <Activity size={14} />
+            <span>Fitness</span>
+          </div>
+        );
+      case 'traveler':
+        return (
+          <div className="persona-badge persona-traveler" id="nav-persona-badge">
+            <Compass size={14} />
+            <span>Traveler</span>
+          </div>
+        );
+      case 'commuter':
+        return (
+          <div className="persona-badge persona-commuter" id="nav-persona-badge">
+            <Car size={14} />
+            <span>Commuter</span>
+          </div>
+        );
+      case 'health':
+        return (
+          <div className="persona-badge persona-health" id="nav-persona-badge">
+            <HeartPulse size={14} />
+            <span>Health</span>
+          </div>
+        );
+      case 'agriculture':
+      default:
+        return (
+          <div className="persona-badge persona-agriculture" id="nav-persona-badge">
+            <Wheat size={14} />
+            <span>Agriculture</span>
+          </div>
+        );
+    }
+  };
+
   return (
     <>
       <header className="site-header">
         <div className="header-container">
           <Link to="/" className="brand-logo" id="nav-brand-logo">
-            <div className="logo-icon-box">
-              <CloudSun className="logo-icon" size={26} />
-            </div>
+            <img src={imdLogo} alt="IMD Mausam" className="nav-imd-logo" />
             <div className="brand-text-group">
-              <span className="brand-name">Mausam</span>
-              <span className="brand-tag">Personalization</span>
+              <span className="brand-name">मौसम MAUSAM</span>
+              <span className="brand-tag">India Meteorological Department</span>
             </div>
           </Link>
 
           <nav className="header-nav">
             {isAuth ? (
               <div className="nav-auth-group">
-                {persona && (
-                  <div className={`persona-badge persona-${persona}`} id="nav-persona-badge">
-                    {persona === 'health' ? (
-                      <>
-                        <HeartPulse size={15} />
-                        <span>Health Mode</span>
-                      </>
-                    ) : (
-                      <>
-                        <Wheat size={15} />
-                        <span>Agri Mode</span>
-                      </>
-                    )}
-                  </div>
-                )}
+                {persona && getPersonaBadge(persona)}
 
                 <button
                   type="button"

@@ -8,6 +8,7 @@ import {
   setPersona,
   clearSession,
 } from './authStorage';
+import { upsertUserProfile } from '../services/supabase';
 
 const AuthContext = createContext(null);
 
@@ -80,6 +81,41 @@ export function AuthProvider({ children }) {
   }, [syncFromStorage]);
 
   /**
+   * Update Profile:
+   * Validates display name (2 to 50 chars).
+   * Updates localStorage user details and React state immediately.
+   * Asynchronously synchronizes with Supabase profile table.
+   */
+  const updateProfile = useCallback(async ({ name }) => {
+    if (typeof name !== 'string') {
+      return { success: false, error: 'Invalid name provided' };
+    }
+    const trimmed = name.trim();
+    if (trimmed.length < 2) {
+      return { success: false, error: 'Display name must be at least 2 characters' };
+    }
+    if (trimmed.length > 50) {
+      return { success: false, error: 'Display name cannot exceed 50 characters' };
+    }
+
+    setAuthenticatedUser({ name: trimmed, email: currentUser?.email });
+    syncFromStorage();
+
+    try {
+      const uid = currentUser?.email || 'demo-user-sih26076';
+      await upsertUserProfile(uid, {
+        name: trimmed,
+        display_name: trimmed,
+        persona: persona,
+      });
+    } catch (e) {
+      console.warn('[AuthContext] Supabase profile sync warning:', e?.message || e);
+    }
+
+    return { success: true };
+  }, [currentUser, persona, syncFromStorage]);
+
+  /**
    * Logout:
    * Destroys ONLY the 4 auth keys from LocalStorage.
    * Transitions to LOGGED_OUT.
@@ -100,6 +136,7 @@ export function AuthProvider({ children }) {
     signup,
     login,
     selectPersona,
+    updateProfile,
     logout,
     refreshState: syncFromStorage,
   };
