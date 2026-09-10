@@ -1,0 +1,144 @@
+{
+  "cityId": "hyderabad",
+  "cityName": "Hyderabad",
+  "state": "Telangana",
+  "coordinates": {
+    "lat": 17.38,
+    "lon": 78.49
+  },
+  "lastUpdated": "2026-09-06T21:30:00+05:30",
+  "current": {
+    "temperature": 23.0,
+    "feelsLike": 23.3,
+    "minTemp": 22.0,
+    "maxTemp": 30.5,
+    "humidity": 74,
+    "condition": "Generally Cloudy",
+    "conditionIcon": "cloudy",
+    "wind": {
+      "speedKmh": 9.4,
+      "direction": "NW"
+    },
+    "rain": {
+      "probability": 58,
+      "amountMm": 6.5
+    },
+    "airQuality": {
+      "aqi": 103,
+      "category": "Moderate",
+      "dominantPollutant": "PM2.5"
+    },
+    "pollen": {
+      "level": "Moderate",
+      "index": 6
+    },
+    "uvIndex": {
+      "value": 8,
+      "category": "Very High"
+    }
+  },
+  "sun": {
+    "sunrise": "06:02",
+    "sunset": "18:27"
+  },
+  "moon": {
+    "moonrise": "00:48",
+    "moonset": "14:44",
+    "phase": "Waning Gibbous"
+  },
+  "alerts": [],
+  "hourlyForecast": [
+    {
+      "date": "07 September",
+      "time": "11:30",
+      "temperature": 22.2,
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "rainProbability": 31,
+      "humidity": 65
+    },
+    {
+      "date": "07 September",
+      "time": "14:30",
+      "temperature": 23.5,
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "rainProbability": 53,
+      "humidity": 74
+    },
+    {
+      "date": "07 September",
+      "time": "17:30",
+      "temperature": 20.6,
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "rainProbability": 51,
+      "humidity": 80
+    }
+  ],
+  "dailyForecast": [
+    {
+      "date": "06/09",
+      "day": "Today",
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "minTemp": 21.3,
+      "maxTemp": 31.9,
+      "rainProbability": 40
+    },
+    {
+      "date": "07/09",
+      "day": "Sunday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 21.1,
+      "maxTemp": 29.2,
+      "rainProbability": 47
+    },
+    {
+      "date": "08/09",
+      "day": "Monday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 21.2,
+      "maxTemp": 31.7,
+      "rainProbability": 53
+    },
+    {
+      "date": "09/09",
+      "day": "Tuesday",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 22.2,
+      "maxTemp": 30.9,
+      "rainProbability": 56
+    },
+    {
+      "date": "10/09",
+      "day": "Wednesday",
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "minTemp": 22.2,
+      "maxTemp": 30.6,
+      "rainProbability": 41
+    },
+    {
+      "date": "11/09",
+      "day": "Thursday",
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "minTemp": 22.3,
+      "maxTemp": 29.9,
+      "rainProbability": 47
+    },
+    {
+      "date": "12/09",
+      "day": "Friday",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 21.3,
+      "maxTemp": 30.9,
+      "rainProbability": 45
+    }
+  ]
+}

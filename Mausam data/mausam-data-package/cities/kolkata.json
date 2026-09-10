@@ -1,0 +1,151 @@
+{
+  "cityId": "kolkata",
+  "cityName": "Kolkata",
+  "state": "West Bengal",
+  "coordinates": {
+    "lat": 22.57,
+    "lon": 88.36
+  },
+  "lastUpdated": "2026-09-06T21:30:00+05:30",
+  "current": {
+    "temperature": 28.5,
+    "feelsLike": 30.0,
+    "minTemp": 27.0,
+    "maxTemp": 33.5,
+    "humidity": 82,
+    "condition": "Light Rain",
+    "conditionIcon": "rain",
+    "wind": {
+      "speedKmh": 7.5,
+      "direction": "NW"
+    },
+    "rain": {
+      "probability": 67,
+      "amountMm": 2.4
+    },
+    "airQuality": {
+      "aqi": 135,
+      "category": "Moderate",
+      "dominantPollutant": "PM2.5"
+    },
+    "pollen": {
+      "level": "High",
+      "index": 7
+    },
+    "uvIndex": {
+      "value": 8,
+      "category": "Very High"
+    }
+  },
+  "sun": {
+    "sunrise": "05:23",
+    "sunset": "17:48"
+  },
+  "moon": {
+    "moonrise": "00:09",
+    "moonset": "14:05",
+    "phase": "Waning Gibbous"
+  },
+  "alerts": [
+    {
+      "type": "Heavy Rain Alert",
+      "severity": "amber",
+      "message": "Heavy rainfall is expected in and around Kolkata over the next 24 hours.",
+      "issuedBy": "IMD Regional Meteorological Centre"
+    }
+  ],
+  "hourlyForecast": [
+    {
+      "date": "07 September",
+      "time": "11:30",
+      "temperature": 31.3,
+      "condition": "Moderate Rain",
+      "conditionIcon": "rain",
+      "rainProbability": 57,
+      "humidity": 73
+    },
+    {
+      "date": "07 September",
+      "time": "14:30",
+      "temperature": 30.2,
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "rainProbability": 62,
+      "humidity": 76
+    },
+    {
+      "date": "07 September",
+      "time": "17:30",
+      "temperature": 27.7,
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "rainProbability": 59,
+      "humidity": 83
+    }
+  ],
+  "dailyForecast": [
+    {
+      "date": "06/09",
+      "day": "Today",
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "minTemp": 27.8,
+      "maxTemp": 34.4,
+      "rainProbability": 78
+    },
+    {
+      "date": "07/09",
+      "day": "Sunday",
+      "condition": "Light Rain",
+      "conditionIcon": "rain",
+      "minTemp": 26.7,
+      "maxTemp": 34.0,
+      "rainProbability": 61
+    },
+    {
+      "date": "08/09",
+      "day": "Monday",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 27.6,
+      "maxTemp": 34.7,
+      "rainProbability": 69
+    },
+    {
+      "date": "09/09",
+      "day": "Tuesday",
+      "condition": "Moderate Rain",
+      "conditionIcon": "rain",
+      "minTemp": 27.5,
+      "maxTemp": 34.8,
+      "rainProbability": 77
+    },
+    {
+      "date": "10/09",
+      "day": "Wednesday",
+      "condition": "Moderate Rain",
+      "conditionIcon": "rain",
+      "minTemp": 26.3,
+      "maxTemp": 34.4,
+      "rainProbability": 78
+    },
+    {
+      "date": "11/09",
+      "day": "Thursday",
+      "condition": "Thunderstorm",
+      "conditionIcon": "thunderstorm",
+      "minTemp": 26.8,
+      "maxTemp": 32.5,
+      "rainProbability": 75
+    },
+    {
+      "date": "12/09",
+      "day": "Friday",
+      "condition": "Moderate Rain",
+      "conditionIcon": "rain",
+      "minTemp": 27.9,
+      "maxTemp": 34.4,
+      "rainProbability": 58
+    }
+  ]
+}
