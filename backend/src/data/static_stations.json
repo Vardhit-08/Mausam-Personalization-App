@@ -1,0 +1,93 @@
+[
+  {
+    "station_code": "42182",
+    "station_name": "New Delhi (Safdarjung)",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "latitude": 28.5833,
+    "longitude": 77.2000,
+    "has_coastal_bulletin": false
+  },
+  {
+    "station_code": "43003",
+    "station_name": "Mumbai (Colaba)",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "latitude": 18.9000,
+    "longitude": 72.8167,
+    "has_coastal_bulletin": true
+  },
+  {
+    "station_code": "43014",
+    "station_name": "Mumbai (Santacruz)",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "latitude": 19.1167,
+    "longitude": 72.8500,
+    "has_coastal_bulletin": true
+  },
+  {
+    "station_code": "42809",
+    "station_name": "Kolkata (Alipore)",
+    "city": "Kolkata",
+    "state": "West Bengal",
+    "latitude": 22.5333,
+    "longitude": 88.3333,
+    "has_coastal_bulletin": true
+  },
+  {
+    "station_code": "43279",
+    "station_name": "Chennai (Meenambakkam)",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "latitude": 12.9833,
+    "longitude": 80.1833,
+    "has_coastal_bulletin": true
+  },
+  {
+    "station_code": "43295",
+    "station_name": "Bengaluru (HAL Airport)",
+    "city": "Bengaluru",
+    "state": "Karnataka",
+    "latitude": 12.9500,
+    "longitude": 77.6667,
+    "has_coastal_bulletin": false
+  },
+  {
+    "station_code": "43128",
+    "station_name": "Hyderabad (Begumpet)",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "latitude": 17.4500,
+    "longitude": 78.4667,
+    "has_coastal_bulletin": false
+  },
+  {
+    "station_code": "43063",
+    "station_name": "Pune (Shivajinagar)",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "latitude": 18.5333,
+    "longitude": 73.8500,
+    "has_coastal_bulletin": false
+  },
+  {
+    "station_code": "43192",
+    "station_name": "Goa (Panaji)",
+    "city": "Panaji",
+    "state": "Goa",
+    "latitude": 15.4833,
+    "longitude": 73.8167,
+    "has_coastal_bulletin": true
+  },
+  {
+    "station_code": "42027",
+    "station_name": "Shimla",
+    "city": "Shimla",
+    "state": "Himachal Pradesh",
+    "latitude": 31.1000,
+    "longitude": 77.1667,
+    "has_coastal_bulletin": false
+  }
+]
+

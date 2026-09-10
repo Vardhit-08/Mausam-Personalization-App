@@ -1,0 +1,65 @@
+export const PERSONAS = {
+  FARMER: 'FARMER',
+  TOURIST: 'TOURIST',
+  STUDENT: 'STUDENT',
+  PARENT: 'PARENT',
+};
+
+// Normalized canonical persona mapping (strictly maps to the 4 supported personas)
+export const PERSONA_ALIASES = {
+  farmer: PERSONAS.FARMER,
+  gardener: PERSONAS.FARMER,
+  agriculture: PERSONAS.FARMER,
+  FARMER: PERSONAS.FARMER,
+
+  tourist: PERSONAS.TOURIST,
+  traveler: PERSONAS.TOURIST,
+  TOURIST: PERSONAS.TOURIST,
+  TRAVELER: PERSONAS.TOURIST,
+
+  student: PERSONAS.STUDENT,
+  STUDENT: PERSONAS.STUDENT,
+
+  parent: PERSONAS.PARENT,
+  family: PERSONAS.PARENT,
+  families: PERSONAS.PARENT,
+  PARENT: PERSONAS.PARENT,
+};
+
+export const CARD_TYPES = {
+  CURRENT_WEATHER_CARD: 'CURRENT_WEATHER_CARD',
+  COMFORT_INDEX_CARD: 'COMFORT_INDEX_CARD',
+  FARM_ADVISORY_CARD: 'FARM_ADVISORY_CARD',
+  TOURIST_SIGHTSEEING_CARD: 'TOURIST_SIGHTSEEING_CARD',
+  STUDENT_COMMUTE_CARD: 'STUDENT_COMMUTE_CARD',
+  PARENT_SAFETY_CARD: 'PARENT_SAFETY_CARD',
+};
+
+export const ALERT_TYPES = {
+  HEAVY_RAINFALL: 'HEAVY_RAINFALL',
+  EXTREME_HEAT: 'EXTREME_HEAT',
+  COLDWAVE: 'COLDWAVE',
+  HIGH_AQI: 'HIGH_AQI',
+  SEVERE_WEATHER: 'SEVERE_WEATHER',
+  DENSE_FOG: 'DENSE_FOG',
+  STRONG_WIND: 'STRONG_WIND',
+};
+
+export const SEVERITY_LEVELS = {
+  LOW: 'LOW',
+  MODERATE: 'MODERATE',
+  HIGH: 'HIGH',
+  SEVERE: 'SEVERE',
+};
+
+export const CACHE_KEYS = {
+  WEATHER_DASHBOARD: (lat, lon, persona) => `weather_${lat}_${lon}_${persona}`,
+  PERSONALIZED_HOME: (userId, persona) => `cache:persona:${userId || 'anon'}:${persona}`,
+  NORMALIZED_WEATHER: (lat, lon) => `weather_norm_${lat}_${lon}`,
+};
+
+export const CACHE_TTL = {
+  WEATHER_DATA: 900, // 15 mins
+  PERSONALIZED_HOME: 900, // 15 mins
+  STATIONS: 86400, // 24 hours
+};

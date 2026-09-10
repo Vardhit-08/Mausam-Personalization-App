@@ -1,0 +1,101 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Mausam Persona Personalization Microservice API",
+    "description": "BFF and Decision Layer Gateway for personalized weather aggregation, composite scoring, and alerts for SIH Problem Statement 26076 (Ministry of Earth Sciences / IMD).",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api/v1",
+      "description": "Local Development Server"
+    }
+  ],
+  "paths": {
+    "/weather/dashboard": {
+      "get": {
+        "summary": "Retrieve Aggregated Weather Dashboard",
+        "description": "Fetches base weather combined with persona-specific specialized environmental metrics.",
+        "parameters": [
+          { "name": "lat", "in": "query", "required": true, "schema": { "type": "number", "example": 28.6139 } },
+          { "name": "lon", "in": "query", "required": true, "schema": { "type": "number", "example": 77.2090 } },
+          { "name": "persona", "in": "query", "required": true, "schema": { "type": "string", "example": "health_conscious" } }
+        ],
+        "responses": {
+          "200": { "description": "Aggregated weather dataset" },
+          "400": { "description": "Missing query parameters" }
+        }
+      }
+    },
+    "/personalized-home": {
+      "get": {
+        "summary": "Personalized Homepage Decision Layer Cards",
+        "description": "Returns tailored composite index cards, best hours timeline, and natural language summary for the user's active persona.",
+        "parameters": [
+          { "name": "lat", "in": "query", "required": false, "schema": { "type": "number", "example": 28.6139 } },
+          { "name": "lon", "in": "query", "required": false, "schema": { "type": "number", "example": 77.2090 } },
+          { "name": "persona", "in": "query", "required": false, "schema": { "type": "string", "example": "FITNESS" } }
+        ],
+        "responses": {
+          "200": { "description": "Personalized homepage payload" }
+        }
+      }
+    },
+    "/stations": {
+      "get": {
+        "summary": "Search IMD Stations",
+        "parameters": [
+          { "name": "search", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "List of matching IMD weather stations" }
+        }
+      }
+    },
+    "/stations/nearest": {
+      "get": {
+        "summary": "Find Nearest IMD Station",
+        "parameters": [
+          { "name": "lat", "in": "query", "required": true, "schema": { "type": "number", "example": 28.6139 } },
+          { "name": "lon", "in": "query", "required": true, "schema": { "type": "number", "example": 77.2090 } }
+        ],
+        "responses": {
+          "200": { "description": "Closest station details" }
+        }
+      }
+    },
+    "/packing/generate": {
+      "post": {
+        "summary": "Generate Smart Packing Checklist",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["destination"],
+                "properties": {
+                  "destination": { "type": "string", "example": "Shimla" },
+                  "startDate": { "type": "string", "example": "2026-09-10" },
+                  "endDate": { "type": "string", "example": "2026-09-15" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Generated packing checklist" }
+        }
+      }
+    },
+    "/alerts": {
+      "get": {
+        "summary": "Get User and Broadcast Weather Alerts",
+        "responses": {
+          "200": { "description": "List of active alerts" }
+        }
+      }
+    }
+  }
+}
+
