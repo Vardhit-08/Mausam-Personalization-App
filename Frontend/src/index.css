@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    Mausam Personalization App - Official IMD Institutional Design System
    ========================================================================== */
 
@@ -129,9 +129,7 @@ html, body {
 .persona-env-fitness .greeting-name {
   color: #38bdf8;
 }
-.persona-env-fitness .insight-main-card {
-  border-left: 3px solid #0284c7;
-}
+
 
 /* 2. TRAVELER: Subtle Warm Horizon / Sunrise Influence */
 .persona-env-traveler {
@@ -140,9 +138,7 @@ html, body {
 .persona-env-traveler .greeting-name {
   color: #60a5fa;
 }
-.persona-env-traveler .insight-main-card {
-  border-left: 3px solid #3b82f6;
-}
+
 
 /* 3. HEALTH & WELLNESS: Calm Blue with Subtle Teal Clean-Air Influence */
 .persona-env-health {
@@ -151,9 +147,7 @@ html, body {
 .persona-env-health .greeting-name {
   color: #2dd4bf;
 }
-.persona-env-health .insight-main-card {
-  border-left: 3px solid #0d9488;
-}
+
 
 /* 4. COMMUTER: Deeper Blue / Slate Road & Fog Atmosphere */
 .persona-env-commuter {
@@ -162,9 +156,7 @@ html, body {
 .persona-env-commuter .greeting-name {
   color: #94a3b8;
 }
-.persona-env-commuter .insight-main-card {
-  border-left: 3px solid #64748b;
-}
+
 
 /* 5. AGRICULTURE: Subtle Organic Earth / Vegetation Undertone */
 .persona-env-agriculture {
@@ -173,9 +165,7 @@ html, body {
 .persona-env-agriculture .greeting-name {
   color: #4ade80;
 }
-.persona-env-agriculture .insight-main-card {
-  border-left: 3px solid #16a34a;
-}
+
 
 /* Default Subtle clean institutional atmospheric background */
 body {
@@ -543,11 +533,11 @@ a:hover {
 }
 
 .card-health {
-  border-left: 4px solid var(--health-accent);
+  border: 1px solid var(--border-subtle);
 }
 
 .card-agri {
-  border-left: 4px solid var(--agri-accent);
+  border: 1px solid var(--border-subtle);
   margin-left: 1.5rem;
 }
 
@@ -2602,7 +2592,6 @@ a:hover {
 .insight-card-wrapper {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  border-left: 4px solid var(--imd-blue);
   border-radius: var(--radius-md);
   padding: 1.5rem;
   display: flex;
@@ -2756,15 +2745,15 @@ a:hover {
 /* Plain-English Recommendation */
 .plain-english-headline-box {
   background: var(--bg-surface-elevated);
-  border-left: 3px solid var(--status-green);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
   padding: 0.85rem 1rem;
 }
 
 .headline-text {
   font-size: 0.95rem;
-  color: #ffffff;
-  font-weight: 500;
+  color: var(--text-primary);
+  font-weight: 600;
   line-height: 1.5;
 }
 
@@ -2786,11 +2775,13 @@ a:hover {
 }
 
 .time-window-pill.best-window {
-  border-left: 3px solid var(--status-green);
+  border: 1px solid rgba(22, 163, 74, 0.35);
+  background: var(--status-green-bg);
 }
 
 .time-window-pill.avoid-window {
-  border-left: 3px solid var(--status-red);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  background: var(--status-red-bg);
 }
 
 .window-label {
@@ -2804,7 +2795,8 @@ a:hover {
 
 .window-val {
   font-size: 0.9rem;
-  color: #ffffff;
+  color: var(--text-primary);
+  font-weight: 700;
 }
 
 /* Supporting Insight Metric Tiles */
@@ -3313,8 +3305,8 @@ a:hover {
 }
 
 .notification-item.unread {
-  background: rgba(0, 104, 183, 0.12);
-  border-left: 3px solid var(--imd-blue);
+  background: rgba(0, 104, 183, 0.10);
+  border: 1px solid rgba(0, 104, 183, 0.25);
 }
 
 /* City Selector Dialog */
@@ -4187,3 +4179,1759 @@ a:hover {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Part D: Strong Editorial / Public-Service Advisory Section & Dashboard Hierarchy
+   ========================================================================== */
+.advisory-editorial-panel {
+  background: linear-gradient(180deg, var(--bg-surface-elevated) 0%, var(--bg-surface) 100%);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28);
+  position: relative;
+}
+
+.advisory-editorial-panel .insight-kicker {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  padding: 0.25rem 0.6rem;
+  background: rgba(0, 104, 183, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-sm);
+}
+
+.dashboard-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.primary-advisory-block {
+  margin-bottom: 0.5rem;
+}
+
+.station-meta-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   Part E: Card Reduction & Restructuring (Structural Diversification)
+   ========================================================================== */
+
+/* Cohesive Meteorological Observation Strip (Replaces 4 repetitive boxes) */
+.observation-metric-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-subtle);
+  gap: 1.25rem;
+}
+
+.obs-metric-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.obs-col-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.obs-col-primary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.obs-col-val {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-display);
+}
+
+.obs-col-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+.obs-col-badge.aqi-status {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.obs-col-sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.obs-divider {
+  width: 1px;
+  height: 48px;
+  background: var(--border-subtle);
+  flex-shrink: 0;
+}
+
+/* Diversified Indicator Grid */
+.cards-structured-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.indicator-item-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.indicator-item-container:hover {
+  border-color: var(--border-medium);
+}
+
+.indicator-meta-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.indicator-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.indicator-body-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.indicator-action-note {
+  font-size: 0.825rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* 1. AQI Compact Visual */
+.aqi-compact-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.aqi-headline-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.aqi-number {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #34d399;
+  font-family: var(--font-display);
+}
+
+.aqi-category-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-radius: var(--radius-sm);
+}
+
+.aqi-pollutant-tag {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.aqi-spectrum-bar {
+  position: relative;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #10b981 0%, #f59e0b 50%, #ef4444 100%);
+  margin: 0.25rem 0;
+}
+
+.aqi-spectrum-indicator {
+  position: absolute;
+  top: -3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #041630;
+  transform: translateX(-50%);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* 2. UV Compact Indicator */
+.uv-compact-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.uv-metric-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.uv-badge-box {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+}
+
+.uv-level-bold {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fbbf24;
+  font-family: var(--font-display);
+}
+
+.uv-burn-notice {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.uv-category-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.uv-burn-timer {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* 3. Commute Hazard Banner */
+.commute-hazard-banner {
+  background: rgba(225, 29, 72, 0.08);
+  border: 1px solid rgba(225, 29, 72, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.hazard-header-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.hazard-status-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fb7185;
+}
+
+.hazard-visibility-badge {
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+  margin-left: auto;
+}
+
+.hazard-action-text {
+  font-size: 0.825rem;
+  color: #e2e8f0;
+  line-height: 1.4;
+}
+
+/* 4. Travel Destination Panel */
+.travel-destination-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.travel-destination-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.travel-dest-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #93c5fd;
+}
+
+.travel-forecast-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.travel-packing-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+}
+
+/* 5. Running Timeline Callout */
+.timeline-window-callout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.window-time-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.window-time-slot {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #38bdf8;
+  font-family: var(--font-display);
+}
+
+.window-rating-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+/* 6. Sweat Risk */
+.sweat-hydration-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sweat-rate-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.sweat-rate-score {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fbbf24;
+  font-family: var(--font-display);
+}
+
+.sweat-category-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+/* 7. Rain Probability */
+.rain-probability-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.rain-metric-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.rain-percent-val {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #60a5fa;
+  font-family: var(--font-display);
+}
+
+.rain-accum-tag {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+/* 8. Agri Soil */
+.agri-soil-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.soil-metric-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.soil-val-bold {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #4ade80;
+  font-family: var(--font-display);
+}
+
+.soil-depth-badge {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+/* 9. Agri Spray */
+.agri-spray-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.spray-window-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.spray-slot-bold {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2dd4bf;
+  font-family: var(--font-display);
+}
+
+.drift-risk-tag {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 768px) {
+  .observation-metric-strip {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .obs-divider {
+    width: 100%;
+    height: 1px;
+  }
+  .cards-structured-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Part F: Intentional Typography & Spacing Rhythm (Public-Service Weather Design)
+   ========================================================================== */
+
+/* Critical Weather Values (Large Display) */
+.val-critical,
+.obs-col-val,
+.score-big {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+/* Advisory & Section Headings (Strong) */
+.insight-main-title,
+.generic-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+/* Operational Recommendations & Guidance (Medium) */
+.headline-text,
+.hazard-action-text,
+.indicator-action-note {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* Metadata, Station Baseline, Update Timestamps (Small) */
+.station-update-meta,
+.station-meta-badge,
+.obs-col-label,
+.normal-metric-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+/* ==========================================================================
+   Part G: Navigation, Header & Deliberate Institutional Light/Dark Theme
+   ========================================================================== */
+
+/* Theme Toggle Button */
+.nav-theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.38rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.nav-theme-toggle-btn:hover {
+  background: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.theme-toggle-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   DELIBERATE INSTITUTIONAL LIGHT MODE SYSTEM
+   (No generic SaaS white-cards; structured government meteorological aesthetic)
+   -------------------------------------------------------------------------- */
+[data-theme=light] {
+  --bg-main: #f0f4f8;
+  --bg-header: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #f8fafc;
+  --bg-surface-card: #ffffff;
+  --bg-surface-glass: #ffffff;
+  --bg-surface-glass-border: #cbd5e1;
+  --border-subtle: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-focus: #0068B7;
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+  --text-secondary: #334155;
+  --border-subtle: #cbd5e1;
+
+  --accent-primary: #0068B7;
+  --accent-primary-hover: #004e8a;
+
+  --shadow-subtle: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-elevated: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.05);
+
+  --status-green-bg: rgba(22, 163, 74, 0.10);
+  --status-green-border: rgba(22, 163, 74, 0.30);
+  --status-amber-bg: rgba(217, 119, 6, 0.10);
+  --status-amber-border: rgba(217, 119, 6, 0.30);
+  --status-red-bg: rgba(220, 38, 38, 0.10);
+  --status-red-border: rgba(220, 38, 38, 0.30);
+  --status-blue-bg: rgba(0, 104, 183, 0.10);
+  --status-blue-border: rgba(0, 104, 183, 0.30);
+}
+
+[data-theme=light] body {
+  background: #f0f4f8;
+  color: #0f172a;
+}
+
+[data-theme=light] .brand-name {
+  color: #004e8a;
+}
+
+[data-theme=light] .brand-tag {
+  color: #475569;
+}
+
+[data-theme=light] .site-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme=light] .greeting-title {
+  color: #0f172a;
+}
+
+[data-theme=light] .val-critical,
+[data-theme=light] .obs-col-val,
+[data-theme=light] .score-big,
+[data-theme=light] .insight-main-title,
+[data-theme=light] .generic-section-title {
+  color: #0f172a;
+}
+
+[data-theme=light] .advisory-editorial-panel {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+[data-theme=light] .advisory-score-value {
+  color: #0068B7;
+}
+
+[data-theme=light] .observation-metric-strip {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+[data-theme=light] .obs-divider {
+  background: #e2e8f0;
+}
+
+[data-theme=light] .dyn-metric-card-v2 {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+[data-theme=light] .dyn-title,
+[data-theme=light] .dyn-value {
+  color: #0f172a;
+}
+
+[data-theme=light] .why-drawer-v2 {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+
+[data-theme=light] .why-toggle-btn {
+  color: #475569;
+}
+
+[data-theme=light] .best-hours-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+[data-theme=light] .hourly-slot-card {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+[data-theme=light] .slot-time,
+[data-theme=light] .slot-temp {
+  color: #0f172a;
+}
+
+[data-theme=light] .sun-moon-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+[data-theme=light] .persistence-notice-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+[data-theme=light] .generic-forecast-table-card,
+[data-theme=light] .generic-normals-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+[data-theme=light] .forecast-day-card,
+[data-theme=light] .normal-metric-box {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+[data-theme=light] .normal-metric-val {
+  color: #0f172a;
+}
+
+[data-theme=light] .modal-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme=light] .modal-title {
+  color: #0f172a;
+}
+
+[data-theme=light] .modal-header {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+[data-theme=light] .modal-footer {
+  border-top: 1px solid #e2e8f0;
+}
+
+[data-theme=light] .profile-readonly-card,
+[data-theme=light] .pref-box {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+[data-theme=light] .btn-pref-option {
+  background: #ffffff;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+[data-theme=light] .btn-pref-option.active {
+  background: #0068B7;
+  color: #ffffff;
+  border-color: #0068B7;
+}
+
+[data-theme=light] .btn-persona-tile {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #1e293b;
+}
+
+[data-theme=light] .btn-persona-tile.active {
+  background: #eff6ff;
+  border-color: #0068B7;
+}
+
+[data-theme=light] .btn-secondary {
+  background: #f1f5f9;
+  color: #1e293b;
+  border-color: #cbd5e1;
+}
+
+[data-theme=light] .btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+[data-theme=light] .btn-ghost {
+  color: #334155;
+}
+
+[data-theme=light] .btn-ghost:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+[data-theme=light] .notification-dropdown {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme=light] .notification-item {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+[data-theme=light] .notification-item:hover {
+  background: #f8fafc;
+}
+
+[data-theme=light] .guided-tour-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme=light] .demo-scenario-bar {
+  background: #f8fafc;
+  border-bottom: 1px solid #cbd5e1;
+}
+
+[data-theme=light] .scenario-pill-btn {
+  background: #ffffff;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+[data-theme=light] .mobile-bottom-nav {
+  background: #ffffff;
+  border-top: 1px solid #cbd5e1;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme=light] .mobile-nav-btn {
+  color: #64748b;
+}
+
+[data-theme=light] .mobile-nav-btn.active {
+  color: #0068B7;
+}
+
+/* Light Mode Persona Atmospheres */
+[data-theme=light] .persona-env-fitness {
+  background: radial-gradient(circle at 50% 0%, #dbeafe 0%, #f0f4f9 45%, #e2e8f0 100%) fixed;
+}
+[data-theme=light] .persona-env-fitness .greeting-name {
+  color: #0284c7;
+}
+
+[data-theme=light] .persona-env-traveler {
+  background: radial-gradient(circle at 60% 0%, #ede9fe 0%, #f0f4f9 45%, #e2e8f0 100%) fixed;
+}
+[data-theme=light] .persona-env-traveler .greeting-name {
+  color: #2563eb;
+}
+
+[data-theme=light] .persona-env-health {
+  background: radial-gradient(circle at 40% 0%, #ccfbf1 0%, #f0f4f9 45%, #e2e8f0 100%) fixed;
+}
+[data-theme=light] .persona-env-health .greeting-name {
+  color: #0f766e;
+}
+
+[data-theme=light] .persona-env-commuter {
+  background: radial-gradient(circle at 50% 0%, #f1f5f9 0%, #e2e8f0 45%, #cbd5e1 100%) fixed;
+}
+[data-theme=light] .persona-env-commuter .greeting-name {
+  color: #475569;
+}
+
+[data-theme=light] .persona-env-agriculture {
+  background: radial-gradient(circle at 45% 0%, #dcfce7 0%, #f0f4f9 45%, #e2e8f0 100%) fixed;
+}
+[data-theme=light] .persona-env-agriculture .greeting-name {
+  color: #15803d;
+}
+
+/* Light Mode Readability Refinements (Bug 1 Fix) */
+[data-theme=light] .sun-card-title {
+  color: #0f172a;
+}
+[data-theme=light] .sun-card-badge {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-weight: 600;
+}
+[data-theme=light] .sun-timing-item {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+}
+[data-theme=light] .time-label {
+  color: #334155;
+  font-weight: 600;
+}
+[data-theme=light] .time-val {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .solar-arc-curve {
+  border: 2px dashed #64748b;
+  border-bottom: none;
+}
+[data-theme=light] .solar-horizon-line {
+  background: #cbd5e1;
+}
+
+[data-theme=light] .daily-forecast-section {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+[data-theme=light] .forecast-title {
+  color: #0f172a;
+}
+[data-theme=light] .forecast-station-tag {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-weight: 600;
+}
+[data-theme=light] .forecast-day-row {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+[data-theme=light] .day-name {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .day-date-str {
+  color: #475569;
+  font-weight: 500;
+}
+[data-theme=light] .condition-text {
+  color: #1e293b;
+  font-weight: 500;
+}
+[data-theme=light] .rain-prob-pill {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+[data-theme=light] .min-temp {
+  color: #0369a1;
+  font-weight: 600;
+}
+[data-theme=light] .max-temp {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .temp-range-track {
+  background: #e2e8f0;
+}
+[data-theme=light] .temp-range-fill {
+  background: #0284c7;
+}
+
+[data-theme=light] .best-hours-section {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+[data-theme=light] .section-title {
+  color: #0f172a;
+}
+[data-theme=light] .legend-pills {
+  color: #334155;
+  font-weight: 500;
+}
+[data-theme=light] .timeline-slot-card {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+}
+[data-theme=light] .timeline-slot-card:hover {
+  border-color: #0068B7;
+  background: #ffffff;
+}
+[data-theme=light] .timeline-slot-card.selected {
+  background: #eff6ff;
+  border-color: #0068B7;
+}
+[data-theme=light] .slot-time {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .slot-temp {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .slot-rain {
+  color: #334155;
+  font-weight: 600;
+}
+[data-theme=light] .slot-status-tag {
+  color: #334155;
+  font-weight: 600;
+}
+[data-theme=light] .timeline-detail-popup {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme=light] .station-selector-trigger {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+}
+[data-theme=light] .station-name-btn {
+  color: #0f172a;
+}
+[data-theme=light] .station-status-text {
+  color: #334155;
+}
+[data-theme=light] .obs-col-label {
+  color: #475569;
+  font-weight: 600;
+}
+[data-theme=light] .obs-col-val {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .obs-col-unit {
+  color: #334155;
+}
+[data-theme=light] .obs-col-sub {
+  color: #475569;
+}
+
+
+
+/* Clutter Reduction: Progressive disclosure for Climatological Normals */
+.climatological-normals-details {
+  margin-top: 1.25rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+.climatological-normals-summary {
+  padding: 0.85rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.climatological-normals-summary:hover {
+  background: var(--bg-surface-elevated);
+  color: var(--text-primary);
+}
+.climatological-normals-details[open] .climatological-normals-summary {
+  border-bottom: 1px solid var(--border-subtle);
+}
+.climatological-normals-details .generic-normals-card {
+  margin-top: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+[data-theme=light] .climatological-normals-details {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+[data-theme=light] .climatological-normals-summary {
+  color: #334155;
+}
+[data-theme=light] .climatological-normals-summary:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+
+/* ==========================================================================
+   Refined Institutional Startup Transition (Bug 5 Fix)
+   ========================================================================== */
+.splash-experience-container {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+  transition: opacity 0.35s ease-out;
+}
+
+.splash-experience-container.splash-exiting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.splash-subtle-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 45%, rgba(0, 104, 183, 0.15) 0%, rgba(6, 25, 56, 0.95) 100%);
+  pointer-events: none;
+}
+
+.splash-screen-card {
+  position: relative;
+  z-index: 5;
+  width: 90%;
+  max-width: 460px;
+  background: rgba(10, 37, 74, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: splashFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes splashFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.splash-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  animation: splashFadeIn 0.35s ease-out;
+}
+
+.splash-footer-control {
+  margin-top: 1.75rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.splash-stage-dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.splash-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transition: all 0.25s ease;
+}
+
+.splash-dot.active {
+  background: #38bdf8;
+  width: 18px;
+  border-radius: 4px;
+}
+
+.splash-skip-link {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  padding: 0.2rem 0.5rem;
+}
+
+.splash-skip-link:hover {
+  color: #ffffff;
+}
+
+/* Route fallback spinner */
+.splash-route-fallback-container {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.splash-fallback-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.splash-fallback-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.splash-fallback-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.splash-fallback-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.splash-fallback-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.splash-fallback-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(0, 104, 183, 0.2);
+  border-top-color: #0068B7;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-screen-card,
+  .splash-stage,
+  .splash-experience-container {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+
+/* ==========================================================================
+   Official Public-Service IMD Footer & Back-to-Top Control (Bugs 6 & 7 Fix)
+   ========================================================================== */
+.official-imd-footer {
+  margin-top: 3.5rem;
+  background: var(--bg-header);
+  border-top: 1px solid var(--border-subtle);
+  padding: 2.25rem 1.5rem 1.5rem 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .official-imd-footer {
+    padding-bottom: calc(1.5rem + 70px); /* Clear mobile bottom navigation */
+  }
+}
+
+.footer-main-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.footer-identity-group {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-gov-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-imd-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-identity-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.footer-dept-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.footer-ministry-name {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.footer-tagline {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.footer-links-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.footer-nav-link {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+}
+
+.footer-nav-link:hover {
+  background: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.footer-bottom-bar {
+  max-width: 1280px;
+  margin: 1.25rem auto 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.footer-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.footer-modal-list {
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-contact-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  margin-top: 0.35rem;
+}
+
+/* Back-to-Top Subtle Floating Button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.75rem;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: rgba(10, 37, 74, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 850;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-fast);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.back-to-top-btn:hover {
+  background: var(--imd-blue);
+  color: #ffffff;
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .back-to-top-btn {
+    bottom: 5.25rem; /* Sits cleanly above mobile navigation bar */
+    right: 1.25rem;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Light Mode Footer & Back-to-Top Styles */
+[data-theme=light] .official-imd-footer {
+  background: #ffffff;
+  border-top-color: #cbd5e1;
+  color: #334155;
+}
+[data-theme=light] .footer-dept-name {
+  color: #0f172a;
+}
+[data-theme=light] .footer-ministry-name {
+  color: #475569;
+}
+[data-theme=light] .footer-tagline {
+  color: #334155;
+}
+[data-theme=light] .footer-main-container {
+  border-bottom-color: #e2e8f0;
+}
+[data-theme=light] .footer-nav-link {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+[data-theme=light] .footer-nav-link:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+[data-theme=light] .footer-bottom-bar {
+  color: #64748b;
+}
+[data-theme=light] .back-to-top-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+[data-theme=light] .back-to-top-btn:hover {
+  background: #0068B7;
+  color: #ffffff;
+  border-color: #004e8a;
+}
+
+
+
+/* ==========================================================================
+   Comprehensive Systemic Light Mode Theme & Why Drawer Rules (Bug 1 Fix)
+   ========================================================================== */
+
+/* Why Explanation Panel Base (Dark) */
+.why-panel-title {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+.why-panel-desc {
+  margin: 0 0 8px 0;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+.why-formula-card {
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+.why-formula-code {
+  font-size: 0.78rem;
+  color: #38bdf8;
+  font-family: monospace;
+}
+.why-factor-tag {
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+.why-factor-label {
+  color: #38bdf8;
+}
+.why-disclaimer-text {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-style: italic;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 6px;
+}
+
+/* Light Mode Overrides for Why Drawer */
+[data-theme=light] .why-explanation-panel {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+}
+[data-theme=light] .why-panel-title {
+  color: #0f172a;
+}
+[data-theme=light] .why-panel-desc {
+  color: #334155;
+}
+[data-theme=light] .why-formula-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+[data-theme=light] .why-formula-code {
+  color: #0068B7;
+}
+[data-theme=light] .why-factor-tag {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}
+[data-theme=light] .why-factor-label {
+  color: #0068B7;
+}
+[data-theme=light] .why-disclaimer-text {
+  color: #475569;
+  border-top-color: #e2e8f0;
+}
+
+/* Light Mode Overrides for Primary Advisory & Time Windows */
+[data-theme=light] .headline-text {
+  color: #0f172a;
+  font-weight: 600;
+}
+[data-theme=light] .plain-english-headline-box {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+}
+[data-theme=light] .window-label {
+  color: #334155;
+  font-weight: 700;
+}
+[data-theme=light] .window-val {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .time-window-pill {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+}
+[data-theme=light] .time-window-pill.best-window {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+[data-theme=light] .time-window-pill.avoid-window {
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+[data-theme=light] .tile-title {
+  color: #475569;
+  font-weight: 600;
+}
+[data-theme=light] .tile-value {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .tile-subtext {
+  color: #334155;
+}
+[data-theme=light] .insight-tile {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+/* Light Mode Overrides for All Dynamic Card Types */
+[data-theme=light] .indicator-item-container {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+[data-theme=light] .indicator-title {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .card-relevance-pill {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+[data-theme=light] .indicator-action-note {
+  color: #1e293b;
+  font-weight: 500;
+}
+[data-theme=light] .aqi-number {
+  color: #047857;
+}
+[data-theme=light] .aqi-category-tag {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+[data-theme=light] .aqi-pollutant-tag {
+  color: #475569;
+  font-weight: 600;
+}
+[data-theme=light] .uv-badge-box {
+  background: #fef3c7;
+  border-color: #fde68a;
+}
+[data-theme=light] .uv-level-bold {
+  color: #b45309;
+}
+[data-theme=light] .uv-category-name {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .uv-burn-timer {
+  color: #475569;
+  font-weight: 600;
+}
+[data-theme=light] .commute-hazard-banner {
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+[data-theme=light] .hazard-status-title {
+  color: #be123c;
+  font-weight: 700;
+}
+[data-theme=light] .hazard-visibility-badge {
+  color: #334155;
+  background: #ffffff;
+  border: 1px solid #fecdd3;
+  font-weight: 600;
+}
+[data-theme=light] .hazard-action-text {
+  color: #1e293b;
+}
+[data-theme=light] .travel-dest-name {
+  color: #0369a1;
+  font-weight: 700;
+}
+[data-theme=light] .travel-forecast-badge {
+  color: #0f172a;
+  font-weight: 700;
+}
+[data-theme=light] .travel-packing-row {
+  background: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
+}
+[data-theme=light] .packing-tip-text {
+  color: #1e293b;
+  font-weight: 600;
+}
+[data-theme=light] .window-time-slot {
+  color: #0284c7;
+  font-weight: 700;
+}
+[data-theme=light] .window-rating-pill {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+  font-weight: 700;
+}
+[data-theme=light] .sweat-rate-score {
+  color: #b45309;
+  font-weight: 700;
+}
+[data-theme=light] .sweat-category-badge {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  font-weight: 600;
+}
+[data-theme=light] .rain-percent-val {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+[data-theme=light] .rain-accum-tag {
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  font-weight: 600;
+}
+[data-theme=light] .soil-val-bold {
+  color: #15803d;
+  font-weight: 700;
+}
+[data-theme=light] .soil-depth-badge {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  font-weight: 600;
+}
+[data-theme=light] .spray-slot-bold {
+  color: #0f766e;
+  font-weight: 700;
+}
+[data-theme=light] .drift-risk-tag {
+  background: #ccfbf1;
+  color: #115e59;
+  border: 1px solid #99f6e4;
+  font-weight: 600;
+}
+
+/* Light Mode Overrides for Generic IMD Mode */
+[data-theme=light] .generic-notice-card {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+[data-theme=light] .generic-notice-text h4 {
+  color: #1e3a8a;
+}
+[data-theme=light] .generic-notice-text p {
+  color: #1e40af;
+}
+
+/* Light Mode Overrides for Notification Details */
+[data-theme=light] .notification-detail-box {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+}
+

@@ -1,18 +1,3 @@
-/**
- * NotificationCenter.jsx
- * 
- * Context-Aware Notification Center for SIH26076 Mausam (Part 12).
- * 
- * Features:
- * - Unread count badge on bell icon.
- * - Categorized weather alerts with severity color coding (Severe / Warning / Info).
- * - Timestamps and read/unread visual distinction.
- * - Dismiss and Mark-all-as-read actions.
- * - Detail view expansion for deep advisory inspection.
- * - Contextual navigation: smooth scrolling to relevant dashboard anchor.
- * - Alert fatigue cooldown indicator.
- */
-
 import React, { useState, useRef, useEffect } from 'react';
 import {
   Bell,
@@ -39,7 +24,6 @@ export default function NotificationCenter() {
   const [expandedId, setExpandedId] = useState(null);
   const panelRef = useRef(null);
 
-  // Sync notifications from storage periodically
   const refreshNotifications = () => {
     setNotifications(getStoredNotifications());
   };
@@ -49,7 +33,6 @@ export default function NotificationCenter() {
     return () => clearInterval(interval);
   }, []);
 
-  // Close when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (panelRef.current && !panelRef.current.contains(e.target)) {
@@ -175,9 +158,8 @@ export default function NotificationCenter() {
                       </div>
                       <p className="item-message">{alert.message}</p>
 
-                      {/* Expandable Detail View */}
                       {isExpanded && (
-                        <div className="notification-detail-box" style={{ marginTop: '8px', padding: '8px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px', fontSize: '0.78rem', color: '#cbd5e1' }}>
+                        <div className="notification-detail-box">
                           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                             <span style={{ color: '#94a3b8' }}>Category:</span>
                             <strong style={{ color: alert.severity === 'SEVERE' ? '#fb7185' : alert.severity === 'WARNING' ? '#fbbf24' : '#38bdf8' }}>

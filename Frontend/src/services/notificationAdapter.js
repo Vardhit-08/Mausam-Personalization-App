@@ -1,37 +1,13 @@
-/**
- * notificationAdapter.js
- * 
- * Frontend Notification Adapter & State Layer for SIH26076 Mausam (Part 12).
- * 
- * Architecture:
- * Backend Source / Demo Source
- *         ↓
- * Frontend Notification Adapter (Normalizes raw payloads into canonical contract)
- *         ↓
- * Frontend Notification State & Fatigue Filter (Deduplication, Cooldown, Read/Dismiss)
- *         ↓
- * Notification Center Component
- *         ↓
- * UI
- * 
- * Note: FRONTEND ONLY. When backend alert streaming/API is wired, it plugs
- * directly into this adapter without any UI changes.
- */
-
 const STORAGE_KEY_NOTIFICATIONS = 'mausam_notifications_cache';
 const STORAGE_KEY_COOLDOWNS = 'mausam_notifications_cooldowns';
 export const DEFAULT_COOLDOWN_MS = 10 * 60 * 1000; // 10 minutes
 
-/**
- * Normalizes raw backend or mock alerts into the standard Frontend Notification Contract
- */
 export function normalizeNotification(raw) {
   if (!raw) return null;
 
   const now = Date.now();
   const createdAt = typeof raw.createdAt === 'number' ? raw.createdAt : (raw.timestamp_epoch || now);
 
-  // Normalize severity
   let severity = 'INFO';
   const rawSev = String(raw.severity || '').toUpperCase();
   if (rawSev === 'SEVERE' || rawSev === 'EMERGENCY' || rawSev === 'CRITICAL') {
@@ -40,7 +16,6 @@ export function normalizeNotification(raw) {
     severity = 'WARNING';
   }
 
-  // Determine contextual navigation anchor
   let targetAnchor = '#tour-insight-card';
   const type = String(raw.type || '').toUpperCase();
   if (type.includes('COMMUTE') || type.includes('ROAD') || type.includes('TRANSIT')) {
@@ -64,13 +39,10 @@ export function normalizeNotification(raw) {
     createdAt,
     read: Boolean(raw.read),
     dismissed: Boolean(raw.dismissed),
-    rawPayload: raw, // Preserves original backend contract
+    rawPayload: raw,
   };
 }
 
-/**
- * Formats relative time (e.g., "Just now", "15m ago", "1h ago")
- */
 function formatTimeAgo(timestamp) {
   const diff = Date.now() - timestamp;
   if (diff < 60 * 1000) return 'Just now';
@@ -81,9 +53,6 @@ function formatTimeAgo(timestamp) {
   return `${Math.floor(hours / 24)}d ago`;
 }
 
-/**
- * Retrieve notifications from storage with fallback to initial seed advisories
- */
 export function getStoredNotifications(storage = (typeof window !== 'undefined' ? window.localStorage : null)) {
   if (!storage) return getInitialSeedNotifications();
 
@@ -104,9 +73,6 @@ export function getStoredNotifications(storage = (typeof window !== 'undefined' 
   return seed;
 }
 
-/**
- * Initial canonical seed notifications
- */
 export function getInitialSeedNotifications() {
   const now = Date.now();
   return [
@@ -137,9 +103,6 @@ export function getInitialSeedNotifications() {
   ];
 }
 
-/**
- * Save notifications list to storage
- */
 export function saveStoredNotifications(list, storage = (typeof window !== 'undefined' ? window.localStorage : null)) {
   if (!storage) return;
   try {
@@ -149,9 +112,6 @@ export function saveStoredNotifications(list, storage = (typeof window !== 'unde
   }
 }
 
-/**
- * Retrieve cooldown map
- */
 export function getCooldowns(storage = (typeof window !== 'undefined' ? window.localStorage : null)) {
   if (!storage) return {};
   try {
@@ -162,9 +122,6 @@ export function getCooldowns(storage = (typeof window !== 'undefined' ? window.l
   }
 }
 
-/**
- * Save cooldown map
- */
 export function saveCooldowns(cooldowns, storage = (typeof window !== 'undefined' ? window.localStorage : null)) {
   if (!storage) return;
   try {
@@ -174,9 +131,6 @@ export function saveCooldowns(cooldowns, storage = (typeof window !== 'undefined
   }
 }
 
-/**
- * Ingests a new proactive notification with fatigue protection (cooldown & deduplication)
- */
 export function ingestNotification(rawItem, storage = (typeof window !== 'undefined' ? window.localStorage : null), cooldownMs = DEFAULT_COOLDOWN_MS) {
   const item = normalizeNotification(rawItem);
   if (!item) return { accepted: false, reason: 'INVALID_PAYLOAD' };
@@ -190,13 +144,11 @@ export function ingestNotification(rawItem, storage = (typeof window !== 'undefi
     return { accepted: false, reason: 'COOLDOWN_ACTIVE', remainingMs: cooldownMs - (now - lastDispatched) };
   }
 
-  // Deduplication check: check if an identical unread notification exists
   const isDuplicate = currentList.some((n) => n.id === item.id || (n.type === item.type && !n.dismissed && now - n.createdAt < cooldownMs));
   if (isDuplicate) {
     return { accepted: false, reason: 'DUPLICATE_SUPPRESSED' };
   }
 
-  // Update cooldown and prepend new alert
   cooldowns[item.type] = now;
   saveCooldowns(cooldowns, storage);
 
@@ -206,36 +158,24 @@ export function ingestNotification(rawItem, storage = (typeof window !== 'undefi
   return { accepted: true, notification: item, list: updatedList };
 }
 
-/**
- * Mark a notification as read
- */
 export function markAsRead(id, storage = (typeof window !== 'undefined' ? window.localStorage : null)) {
   const list = getStoredNotifications(storage).map((n) => (n.id === id ? { ...n, read: true } : n));
   saveStoredNotifications(list, storage);
   return list;
 }
 
-/**
- * Mark all notifications as read
- */
 export function markAllAsRead(storage = (typeof window !== 'undefined' ? window.localStorage : null)) {
   const list = getStoredNotifications(storage).map((n) => ({ ...n, read: true }));
   saveStoredNotifications(list, storage);
   return list;
 }
 
-/**
- * Dismiss a notification
- */
 export function dismissNotification(id, storage = (typeof window !== 'undefined' ? window.localStorage : null)) {
   const list = getStoredNotifications(storage).map((n) => (n.id === id ? { ...n, dismissed: true } : n));
   saveStoredNotifications(list, storage);
   return list.filter((n) => !n.dismissed);
 }
 
-/**
- * Clear all notifications (for demo resets)
- */
 export function clearAllNotifications(storage = (typeof window !== 'undefined' ? window.localStorage : null)) {
   if (storage) {
     storage.removeItem(STORAGE_KEY_NOTIFICATIONS);

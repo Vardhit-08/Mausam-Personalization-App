@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../auth/AuthContext';
+import { useTheme } from '../utils/themeManager';
 import {
   X,
   User,
@@ -17,6 +18,8 @@ import {
   Save,
   RotateCcw,
   CheckCircle2,
+  Sun,
+  Moon,
 } from 'lucide-react';
 
 const PERSONA_CONFIGS = {
@@ -29,15 +32,14 @@ const PERSONA_CONFIGS = {
 
 export default function ProfileModal({ isOpen, onClose, onLogout }) {
   const { currentUser, persona, selectPersona, updateProfile } = useAuth();
+  const { theme, setTheme } = useTheme();
 
-  // Local form editing state
   const [nameInput, setNameInput] = useState(currentUser?.name || '');
   const [nameError, setNameError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [saveError, setSaveError] = useState('');
 
-  // Preferences state
   const [unitPreference, setUnitPreference] = useState(() => {
     return localStorage.getItem('mausam_pref_unit') || 'celsius';
   });
@@ -45,7 +47,6 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
     return localStorage.getItem('mausam_pref_alert') || 'critical';
   });
 
-  // Re-synchronize local form state whenever modal is opened
   useEffect(() => {
     if (isOpen) {
       setNameInput(currentUser?.name || '');
@@ -57,7 +58,6 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
     }
   }, [isOpen, currentUser]);
 
-  // Support Escape key to close modal
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e) => {
@@ -114,7 +114,6 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
         return;
       }
 
-      // Persist preferences
       localStorage.setItem('mausam_pref_unit', unitPreference);
       localStorage.setItem('mausam_pref_alert', alertPreference);
 
@@ -155,7 +154,7 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
         <div className="modal-header">
           <div className="modal-title-group">
             <h3 id="profile-modal-title" className="modal-title">Profile & Settings</h3>
-            <span className="modal-subtitle">Canonical Session & Meteorological Persona Configuration</span>
+            <span className="modal-subtitle">User Account & Weather Persona Configuration</span>
           </div>
           <button
             type="button"
@@ -169,16 +168,15 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
         </div>
 
         <form onSubmit={handleSave} className="modal-body profile-modal-body">
-          {/* User Identity Header Card */}
           <div className="profile-badge-row">
             <div className="profile-avatar-large">
               <User size={32} />
             </div>
             <div className="profile-avatar-info">
               <h4 className="profile-display-name" id="profile-current-display-name">
-                {currentUser?.name || 'Demo User'}
+                {currentUser?.displayName || currentUser?.name || 'Mausam User'}
               </h4>
-              <p className="profile-display-email">{currentUser?.email || 'demo@example.com'}</p>
+              <p className="profile-display-email">{currentUser?.email || 'user@mausam.gov.in'}</p>
               <div className="profile-active-persona-indicator">
                 {activeConfig ? (
                   <span className={`pill ${activeConfig.pillClass}`} id="profile-persona-value">
@@ -191,7 +189,6 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
             </div>
           </div>
 
-          {/* Status Banners */}
           {saveSuccess && (
             <div className="profile-status-banner banner-success" role="status" id="profile-save-success">
               <CheckCircle2 size={16} />
@@ -205,7 +202,6 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
             </div>
           )}
 
-          {/* Display Name Editing Field */}
           <div className="profile-form-section">
             <label htmlFor="profile-name-input" className="profile-section-label">
               <User size={15} />
@@ -234,7 +230,6 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
             </span>
           </div>
 
-          {/* Read-Only Firebase Identity Details */}
           <div className="profile-form-section">
             <div className="profile-section-label-row">
               <span className="profile-section-label">
@@ -249,13 +244,13 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
               <div className="readonly-row">
                 <span className="readonly-meta-label">Email:</span>
                 <span className="readonly-meta-value" id="profile-email-value">
-                  {currentUser?.email || 'demo@example.com'}
+                  {currentUser?.email || 'user@mausam.gov.in'}
                 </span>
               </div>
               <div className="readonly-row">
                 <span className="readonly-meta-label">Auth UID:</span>
                 <span className="readonly-meta-value readonly-code-value" id="profile-uid-value">
-                  {currentUser?.email ? `usr_fb_${btoa(currentUser.email).replace(/=/g, '').slice(0, 14).toLowerCase()}` : 'demo-user-sih26076'}
+                  {currentUser?.uid || 'Not Authenticated'}
                 </span>
               </div>
               <span className="readonly-explainer">
@@ -264,7 +259,6 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
             </div>
           </div>
 
-          {/* Active Persona Switching */}
           <div className="profile-form-section">
             <div className="profile-section-label-row">
               <span className="profile-section-label">
@@ -306,13 +300,34 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
             </div>
           </div>
 
-          {/* Application Preferences */}
           <div className="profile-form-section">
             <span className="profile-section-label">
               <Shield size={15} />
               <span>Application Preferences</span>
             </span>
             <div className="preferences-cards-grid">
+              <div className="pref-box">
+                <span className="pref-box-title">Display Theme Mode</span>
+                <div className="pref-btn-group" role="group" aria-label="Display Theme Mode">
+                  <button
+                    type="button"
+                    className={`btn-pref-option ${theme === 'dark' ? 'active' : ''}`}
+                    onClick={() => setTheme('dark')}
+                    id="pref-theme-dark"
+                  >
+                    <Moon size={13} style={{ marginRight: '4px' }} /> Dark Mode
+                  </button>
+                  <button
+                    type="button"
+                    className={`btn-pref-option ${theme === 'light' ? 'active' : ''}`}
+                    onClick={() => setTheme('light')}
+                    id="pref-theme-light"
+                  >
+                    <Sun size={13} style={{ marginRight: '4px' }} /> Light Mode
+                  </button>
+                </div>
+              </div>
+
               <div className="pref-box">
                 <span className="pref-box-title">Temperature Units</span>
                 <div className="pref-btn-group" role="group" aria-label="Temperature Units">
@@ -322,7 +337,7 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
                     onClick={() => setUnitPreference('celsius')}
                     id="pref-unit-celsius"
                   >
-                    °C Celsius
+                    ?C Celsius
                   </button>
                   <button
                     type="button"
@@ -330,7 +345,7 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
                     onClick={() => setUnitPreference('fahrenheit')}
                     id="pref-unit-fahrenheit"
                   >
-                    °F Fahrenheit
+                    ?F Fahrenheit
                   </button>
                 </div>
               </div>
@@ -359,7 +374,6 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
             </div>
           </div>
 
-          {/* Form Action Buttons */}
           <div className="profile-form-actions">
             <button
               type="button"
@@ -393,7 +407,7 @@ export default function ProfileModal({ isOpen, onClose, onLogout }) {
         </form>
 
         <div className="modal-footer">
-          <span className="footer-session-note">Mausam SIH26076 • IMD Regional Centre</span>
+          <span className="footer-session-note">Mausam SIH26076 ? IMD Regional Centre</span>
           <button
             type="button"
             className="btn btn-danger-outline btn-sm"

@@ -1,11 +1,3 @@
-/**
- * test-prioritization.js
- * 
- * Automated test suite for SIH26076 Mausam Part 8: Dynamic Card Prioritization.
- * Validates deterministic relevance scoring, persona ranking alignment,
- * and severe weather promotion behavior.
- */
-
 import { generatePersonalizedDashboard } from './src/services/personalizationEngine.js';
 
 let passed = 0;
@@ -25,7 +17,6 @@ console.log('====================================================');
 console.log('MAUSAM SIH26076 — DYNAMIC CARD PRIORITIZATION TEST (PART 8)');
 console.log('====================================================\n');
 
-// 1. Fitness Persona Baseline
 console.log('TEST GROUP 1: Persona Base Alignment');
 const fitnessDash = generatePersonalizedDashboard({
   persona: 'fitness',
@@ -36,7 +27,6 @@ assert(fCards[0].id === 'running-window', `Fitness rank #1 is running-window (go
 assert(fCards[1].id === 'sweat-risk', `Fitness rank #2 is sweat-risk (got ${fCards[1].id})`);
 assert(fCards[0].relevance >= fCards[1].relevance, 'Cards are sorted descending by relevance');
 
-// 2. Traveler Persona Baseline
 const travelerDash = generatePersonalizedDashboard({
   persona: 'traveler',
   cityData: { current: { temperature: 24, humidity: 45, rain: { probability: 15 } } },
@@ -45,7 +35,6 @@ const tCards = travelerDash.prioritizedCards;
 assert(tCards[0].id === 'travel-dest', `Traveler rank #1 is travel-dest (got ${tCards[0].id})`);
 assert(tCards[1].id === 'rain-probability', `Traveler rank #2 is rain-probability (got ${tCards[1].id})`);
 
-// 3. Health Persona Baseline
 const healthDash = generatePersonalizedDashboard({
   persona: 'health',
   cityData: { current: { temperature: 27, humidity: 55, rain: { probability: 10 } } },
@@ -54,7 +43,6 @@ const hCards = healthDash.prioritizedCards;
 assert(hCards[0].id === 'aqi-pollen', `Health rank #1 is aqi-pollen (got ${hCards[0].id})`);
 assert(hCards[1].id === 'uv-radiation', `Health rank #2 is uv-radiation (got ${hCards[1].id})`);
 
-// 4. Commuter Persona Baseline
 const commuterDash = generatePersonalizedDashboard({
   persona: 'commuter',
   cityData: { current: { temperature: 28, humidity: 60, rain: { probability: 20 } } },
@@ -63,7 +51,6 @@ const cCards = commuterDash.prioritizedCards;
 assert(cCards[0].id === 'commute-cond', `Commuter rank #1 is commute-cond (got ${cCards[0].id})`);
 assert(cCards[1].id === 'rain-probability', `Commuter rank #2 is rain-probability (got ${cCards[1].id})`);
 
-// 5. Agriculture Persona Baseline
 const agriDash = generatePersonalizedDashboard({
   persona: 'agriculture',
   cityData: { current: { temperature: 25, humidity: 50, rain: { probability: 5 } } },
@@ -72,9 +59,7 @@ const aCards = agriDash.prioritizedCards;
 assert(aCards[0].id === 'agri-soil', `Agriculture rank #1 is agri-soil (got ${aCards[0].id})`);
 assert(aCards[1].id === 'agri-spray', `Agriculture rank #2 is agri-spray (got ${aCards[1].id})`);
 
-// 6. Severe Weather Promotion
 console.log('\nTEST GROUP 2: Severe Weather Hazard Promotion');
-// In Fitness persona, when heavy downpour occurs (85% rain), rain and commute hazards should be promoted
 const rainStormDash = generatePersonalizedDashboard({
   persona: 'fitness',
   cityData: { current: { temperature: 24, humidity: 85, rain: { probability: 85 } } },
@@ -85,7 +70,6 @@ const rainCard = stormCards.find(c => c.id === 'rain-probability');
 assert(rainCard.relevance >= 90, `Rain card receives heavy downpour boost: got ${rainCard.relevance}`);
 assert(rainCard.why.includes('Heavy downpour boost'), 'Why explanation records heavy downpour boost');
 
-// 7. Active Severe Alerts Promotion
 const alertDash = generatePersonalizedDashboard({
   persona: 'fitness',
   cityData: { current: { temperature: 22, humidity: 70, rain: { probability: 40 } } },
@@ -98,7 +82,6 @@ const alertCards = alertDash.prioritizedCards;
 const alertCommute = alertCards.find(c => c.id === 'commute-cond');
 assert(alertCommute.why.includes('severe weather bulletin'), 'Advises of active severe weather bulletin');
 
-// 8. Sorting Monotonicity
 console.log('\nTEST GROUP 3: Monotonicity & Boundary Invariants');
 let isMonotonic = true;
 for (let i = 0; i < stormCards.length - 1; i++) {

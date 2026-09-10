@@ -1,10 +1,3 @@
-/**
- * BestHoursTimeline.jsx
- * 
- * Hourly Condition Timeline component for SIH26076 Mausam.
- * Color-codes periods (Green = recommended, Amber = caution, Red = avoid).
- */
-
 import React, { useState, useMemo } from 'react';
 import { Clock, Info } from 'lucide-react';
 

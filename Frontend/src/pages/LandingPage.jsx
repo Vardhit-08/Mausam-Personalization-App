@@ -1,7 +1,9 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { CloudRain, HeartPulse, Wheat, ShieldCheck, ArrowRight, Zap, Sun, Wind } from 'lucide-react';
+import Footer from '../components/Footer';
+import BackToTop from '../components/BackToTop';
+import { HeartPulse, Wheat, ShieldCheck, ArrowRight, Zap } from 'lucide-react';
 
 export default function LandingPage() {
   return (
@@ -9,7 +11,6 @@ export default function LandingPage() {
       <Navbar />
 
       <main className="landing-main">
-        {/* Hero Section */}
         <section className="hero-section">
           <div className="hero-content">
             <div className="hero-badge">
@@ -17,7 +18,7 @@ export default function LandingPage() {
               <span>SIH 26076: Mausam Personalization</span>
             </div>
             <h1 className="hero-title">
-              Hyper-Personalized Weather Intelligence for <span className="gradient-text">Health & Agriculture</span>
+              Personalized Weather Advisories for <span className="gradient-text">Health & Agriculture</span>
             </h1>
             <p className="hero-description">
               Raw forecasts aren't enough. Mausam transforms real-time meteorological indicators into actionable advisories tailored specifically to your daily health vulnerabilities and farming lifecycle.
@@ -66,7 +67,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Feature Highlights */}
         <section className="features-section">
           <div className="section-header">
             <span className="section-kicker">Tailored Intelligence</span>
@@ -117,11 +117,8 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="site-footer">
-        <div className="footer-container">
-          <p>© 2026 Mausam Personalization App • SIH Problem Statement 26076</p>
-        </div>
-      </footer>
+      <Footer />
+      <BackToTop />
     </div>
   );
 }

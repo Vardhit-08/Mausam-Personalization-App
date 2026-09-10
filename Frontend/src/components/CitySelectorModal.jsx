@@ -1,16 +1,3 @@
-/**
- * CitySelectorModal.jsx
- * 
- * Part 4: City Selection & Station Picker
- * 
- * Features:
- * - 15 Official IMD Meteorological Stations across India.
- * - Search by Station Name or State.
- * - Region Quick-Filters (All, Metros, Western, Northern, Southern & Eastern).
- * - Real-time metrics preview: Temp, Condition, AQI, and Humidity.
- * - Accessible modal dialog with Escape-key listener, autoFocus, and ARIA roles.
- */
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { CITIES_DATA } from '../data/citiesData';
 import {
@@ -41,7 +28,6 @@ export default function CitySelectorModal({ isOpen, onClose, selectedCityId, onS
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('all');
 
-  // Close on Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isOpen) {
@@ -54,13 +40,11 @@ export default function CitySelectorModal({ isOpen, onClose, selectedCityId, onS
 
   const filteredCities = useMemo(() => {
     return CITIES_DATA.filter((city) => {
-      // Tab filter
       if (activeTab === 'metro' && !METRO_CITY_IDS.includes(city.cityId)) return false;
       if (activeTab === 'west' && !WEST_CITY_IDS.includes(city.cityId)) return false;
       if (activeTab === 'north' && !NORTH_CITY_IDS.includes(city.cityId)) return false;
       if (activeTab === 'south-east' && !SOUTH_EAST_CITY_IDS.includes(city.cityId)) return false;
 
-      // Search query filter
       if (!searchQuery.trim()) return true;
       const query = searchQuery.toLowerCase().trim();
       return (
@@ -95,7 +79,6 @@ export default function CitySelectorModal({ isOpen, onClose, selectedCityId, onS
         aria-modal="true"
         aria-labelledby="city-selector-title"
       >
-        {/* Header */}
         <div className="modal-header">
           <div className="modal-title-group">
             <h3 id="city-selector-title" className="modal-title">Select Weather Station</h3>
@@ -113,7 +96,6 @@ export default function CitySelectorModal({ isOpen, onClose, selectedCityId, onS
         </div>
 
         <div className="modal-body city-selector-body">
-          {/* Search Input */}
           <div className="search-bar-group">
             <Search size={18} className="search-icon" />
             <input
@@ -138,7 +120,6 @@ export default function CitySelectorModal({ isOpen, onClose, selectedCityId, onS
             )}
           </div>
 
-          {/* Region Tabs */}
           <div className="city-region-tabs" role="tablist">
             {REGION_TABS.map((tab) => (
               <button
@@ -155,7 +136,6 @@ export default function CitySelectorModal({ isOpen, onClose, selectedCityId, onS
             ))}
           </div>
 
-          {/* Filter Status */}
           <div className="city-filter-meta">
             <span className="stations-count-label">
               Showing <strong>{filteredCities.length}</strong> of {CITIES_DATA.length} IMD Stations
@@ -167,7 +147,6 @@ export default function CitySelectorModal({ isOpen, onClose, selectedCityId, onS
             )}
           </div>
 
-          {/* City List */}
           <div className="cities-scroll-list" role="listbox" id="cities-station-list">
             {filteredCities.length === 0 ? (
               <div className="city-empty-state">
@@ -244,7 +223,6 @@ export default function CitySelectorModal({ isOpen, onClose, selectedCityId, onS
           </div>
         </div>
 
-        {/* Footer */}
         <div className="modal-footer city-selector-footer">
           <span className="imd-station-disclaimer">
             Data sourced directly from official IMD regional meteorological bulletins.

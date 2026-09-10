@@ -1,10 +1,3 @@
-/**
- * DemoScenarioBar.jsx
- * 
- * Interactive demonstration controller for SIH Hackathon evaluators.
- * Directly triggers real state transitions across Scenarios A through F.
- */
-
 import React from 'react';
 import { PlayCircle, Sparkles } from 'lucide-react';
 

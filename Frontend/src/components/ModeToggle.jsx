@@ -1,9 +1,3 @@
-/**
- * ModeToggle.jsx
- * 
- * Segmented toggle between Personalized and Generic IMD Mausam modes.
- */
-
 import React from 'react';
 import { Sparkles, Layers } from 'lucide-react';
 

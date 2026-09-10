@@ -16,51 +16,44 @@ import {
   calculateAgriConditions,
 } from './indicesCalculator.js';
 
-/**
- * Persona definition registry
- */
 export const PERSONAS = {
   fitness: {
     id: 'fitness',
     name: 'Outdoor Fitness',
     icon: '🏃',
     shortDesc: 'Best workout hours, heat, UV, sweat risk & wind',
-    primaryColor: '#0284c7', // Sky Blue
+    primaryColor: '#0284c7'
   },
   traveler: {
     id: 'traveler',
     name: 'Traveler',
     icon: '✈️',
     shortDesc: 'Destination alerts, packing guidance & flight weather',
-    primaryColor: '#8b5cf6', // Purple/Violet
+    primaryColor: '#8b5cf6',
   },
   health: {
     id: 'health',
     name: 'Health & Wellness',
     icon: '🌿',
     shortDesc: 'Air quality (AQI), pollen, UV & respiratory advisories',
-    primaryColor: '#10b981', // Emerald
+    primaryColor: '#10b981',
   },
   commuter: {
     id: 'commuter',
     name: 'Commuter',
     icon: '🚗',
     shortDesc: 'Visibility, rain probability, fog, road travel hazards',
-    primaryColor: '#f59e0b', // Amber
+    primaryColor: '#f59e0b'
   },
   agriculture: {
     id: 'agriculture',
     name: 'Agriculture & Farming',
     icon: '🌾',
     shortDesc: 'Soil moisture, spray windows & agromet advisories',
-    primaryColor: '#059669', // Forest Green
+    primaryColor: '#059669'
   },
 };
 
-/**
- * Main Personalization Engine pipeline
- * Computes indices, plain-English advice, and dynamic card ordering.
- */
 export function generatePersonalizedDashboard({ persona = 'fitness', cityData, scenarioOverrides = {} }) {
   const current = { ...cityData?.current, ...scenarioOverrides?.current };
   const condition = scenarioOverrides?.condition || current.condition || 'Partly Cloudy';
@@ -72,7 +65,6 @@ export function generatePersonalizedDashboard({ persona = 'fitness', cityData, s
 
   const activePersona = PERSONAS[persona] ? persona : 'fitness';
 
-  // 1. Calculate All Algorithmic Indices
   const sweatRisk = calculateSweatRisk({
     temperature: temp,
     humidity,
@@ -118,7 +110,6 @@ export function generatePersonalizedDashboard({ persona = 'fitness', cityData, s
     temperature: temp,
   });
 
-  // 2. Primary Insight Card based on Persona
   let insightCard = {};
 
   if (activePersona === 'fitness') {
@@ -215,7 +206,6 @@ export function generatePersonalizedDashboard({ persona = 'fitness', cityData, s
       ],
     };
   } else {
-    // Agriculture fallback
     insightCard = {
       title: 'Agrometeorology & Crop Lifecycle Advisory',
       scoreLabel: 'Field Operations Score',
@@ -240,7 +230,6 @@ export function generatePersonalizedDashboard({ persona = 'fitness', cityData, s
     };
   }
 
-  // Context parameters for card prioritization
   const weatherContext = {
     rainProb,
     temp,
@@ -251,8 +240,6 @@ export function generatePersonalizedDashboard({ persona = 'fitness', cityData, s
     hasSevereAlerts: Boolean(scenarioOverrides?.alerts?.length || cityData?.alerts?.length),
   };
 
-  // 3. Dynamic Card Prioritization (Deterministic Relevance Scoring)
-  // Formula: Relevance = Persona_Relevance + Weather_Relevance + Severity + Context
   const cardConfigs = [
     {
       id: 'running-window',
@@ -368,7 +355,6 @@ export function generatePersonalizedDashboard({ persona = 'fitness', cityData, s
     };
   });
 
-  // Sort cards descending by computed relevance score
   const prioritizedCards = [...cards].sort((a, b) => b.relevance - a.relevance);
 
   return {
@@ -386,10 +372,6 @@ export function generatePersonalizedDashboard({ persona = 'fitness', cityData, s
   };
 }
 
-/**
- * Deterministic card relevance calculation
- * Formula: Relevance = Persona_Relevance + Weather_Relevance + Severity + Context
- */
 export function calculateRelevance(cardId, persona, ctx = {}) {
   const rainProb = Number(ctx.rainProb) || 0;
   const temp = Number(ctx.temp) || 28;
@@ -403,7 +385,6 @@ export function calculateRelevance(cardId, persona, ctx = {}) {
   let severityScore = 0;
   let reason = '';
 
-  // 1. Persona Base Alignment
   if (persona === 'fitness') {
     if (cardId === 'running-window') { personaScore = 90; reason = 'Primary fitness schedule anchor'; }
     else if (cardId === 'sweat-risk') { personaScore = 84; reason = 'Key thermoregulatory hydration indicator'; }
@@ -451,7 +432,6 @@ export function calculateRelevance(cardId, persona, ctx = {}) {
     else { personaScore = 20; reason = 'Non-agricultural fitness metric'; }
   }
 
-  // 2. Weather Severity Amplification (Severe Weather Promotion)
   if (rainProb >= 70 && (cardId === 'rain-probability' || cardId === 'commute-cond')) {
     weatherScore += 18;
     reason += ' + Heavy downpour boost (+18)';
@@ -474,7 +454,6 @@ export function calculateRelevance(cardId, persona, ctx = {}) {
     reason += ' + High wind drift hazard (+14)';
   }
 
-  // 3. Severe Weather Warning Promotion
   if (hasSevereAlerts) {
     if (cardId === 'commute-cond' || cardId === 'rain-probability' || cardId === 'travel-dest') {
       severityScore += 25;
@@ -482,13 +461,11 @@ export function calculateRelevance(cardId, persona, ctx = {}) {
     }
   }
 
-  // 4. Low visibility alert
   if (visibility < 2.0 && cardId === 'commute-cond') {
     severityScore += 22;
     reason += ' + Dense fog sightline loss (+22)';
   }
 
-  // 5. Total calculation and clamping (5 - 99)
   const total = Math.max(5, Math.min(99, Math.round(personaScore + weatherScore + severityScore)));
 
   return {

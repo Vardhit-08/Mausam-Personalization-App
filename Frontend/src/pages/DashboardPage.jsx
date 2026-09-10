@@ -1,4 +1,4 @@
-/**
+﻿/**
  * DashboardPage.jsx
  * 
  * Part 5: Personalized Dashboard Foundation
@@ -33,20 +33,17 @@ import InsightCard from '../components/InsightCard';
 import DynamicCardGrid from '../components/DynamicCardGrid';
 import BestHoursTimeline from '../components/BestHoursTimeline';
 import SunMoonCard from '../components/SunMoonCard';
+import Footer from '../components/Footer';
+import BackToTop from '../components/BackToTop';
 import NotificationCenter from '../components/NotificationCenter';
 import DemoScenarioBar from '../components/DemoScenarioBar';
 import { CITIES_DATA } from '../data/citiesData';
 import { generatePersonalizedDashboard, PERSONAS } from '../services/personalizationEngine';
 import {
-  Sun,
-  Droplets,
-  Wind,
-  CloudSun,
   MapPin,
   RefreshCw,
   SlidersHorizontal,
   Lightbulb,
-  CheckCircle2,
   Layers,
   Sparkles,
   LayoutDashboard,
@@ -126,7 +123,7 @@ export default function DashboardPage() {
             <div className="greeting-group">
               <div className="greeting-title-row">
                 <h1 className="greeting-title">
-                  Welcome, <span className="greeting-name">{currentUser?.name || currentUser?.email?.split('@')[0] || 'Meteorology User'}</span>
+                  Welcome, <span className="greeting-name">{currentUser?.displayName || currentUser?.name || currentUser?.email?.split('@')[0] || 'Meteorology User'}</span>
                 </h1>
                 <div className={`persona-indicator-pill ${activePersonaKey}`} id="dashboard-persona-pill">
                   <span className="persona-emoji-icon">{PERSONAS[activePersonaKey]?.icon || '🌤️'}</span>
@@ -219,83 +216,141 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          {/* Current General Weather Metric Bar */}
-          <section className="general-weather-bar" id="tour-weather-bar">
-            <div className="weather-metric-tile">
-              <div className="tile-icon-box bg-amber">
-                <Sun size={22} />
-              </div>
-              <div className="tile-info">
-                <span className="tile-label">Ambient Temperature</span>
-                <span className="tile-val">
-                  {(activeScenario?.overrides?.temperature ?? currentCity.current?.temperature)?.toFixed(1)}°C
-                </span>
-                <span className="tile-sub">
-                  Feels like {(currentCity.current?.feelsLike || currentCity.current?.temperature)?.toFixed(1)}°C
-                </span>
-              </div>
-            </div>
-
-            <div className="weather-metric-tile">
-              <div className="tile-icon-box bg-blue">
-                <Droplets size={22} />
-              </div>
-              <div className="tile-info">
-                <span className="tile-label">Relative Humidity</span>
-                <span className="tile-val">
-                  {activeScenario?.overrides?.humidity ?? currentCity.current?.humidity ?? 60}%
-                </span>
-                <span className="tile-sub">
-                  {activeScenario?.overrides?.condition ?? currentCity.current?.condition ?? 'Partly Cloudy'}
-                </span>
-              </div>
-            </div>
-
-            <div className="weather-metric-tile">
-              <div className="tile-icon-box bg-teal">
-                <Wind size={22} />
-              </div>
-              <div className="tile-info">
-                <span className="tile-label">Wind Velocity</span>
-                <span className="tile-val">
-                  {currentCity.current?.wind?.speedKmh || 12.0} km/h
-                </span>
-                <span className="tile-sub">
-                  Direction: {currentCity.current?.wind?.direction || 'WNW'}
-                </span>
-              </div>
-            </div>
-
-            <div className="weather-metric-tile">
-              <div className="tile-icon-box bg-indigo">
-                <CloudSun size={22} />
-              </div>
-              <div className="tile-info">
-                <span className="tile-label">Air Quality Index</span>
-                <span className="tile-val">
-                  AQI {currentCity.current?.airQuality?.aqi || 109}
-                </span>
-                <span className="tile-sub">
-                  {currentCity.current?.airQuality?.category || 'Moderate'} ({currentCity.current?.airQuality?.dominantPollutant || 'PM2.5'})
-                </span>
-              </div>
-            </div>
-          </section>
-
-          {/* VIEW MODE 1: PERSONALIZED VIEW */}
+          {/* VIEW MODE 1: PERSONALIZED VIEW (Hierarchy: Advisory -> Best Hours -> Important Conditions -> Forecast -> Raw Data) */}
           {viewMode === 'personalized' && (
             <div className="personalized-view-container" id="personalized-view-root">
-              {/* Leading Primary Insight Card */}
-              <InsightCard insightData={personalizedData.insightCard} />
+              {/* 1. PRIMARY ADVISORY: Official Editorial Public-Service Advisory */}
+              <div className="dashboard-section-block primary-advisory-block">
+                <InsightCard insightData={personalizedData.insightCard} />
+              </div>
 
-              {/* Dynamically Prioritized Indicator Cards */}
-              <DynamicCardGrid cards={personalizedData.prioritizedCards} />
+              {/* 2. ACTION / BEST HOURS: Operational Guidance Timeline */}
+              <div className="dashboard-section-block best-hours-block" id="tour-indices-section">
+                <div className="generic-section-title-row">
+                  <h3 className="generic-section-title">Operational Time Windows</h3>
+                  
+                </div>
+                <BestHoursTimeline persona={activePersonaKey} />
+              </div>
 
-              {/* Best Hours Timeline */}
-              <BestHoursTimeline persona={activePersonaKey} />
+              {/* 3. IMPORTANT CONDITIONS: Dynamically Prioritized Risk Indicators */}
+              <div className="dashboard-section-block prioritized-conditions-block">
+                <div className="generic-section-title-row">
+                  <h3 className="generic-section-title">Contextual Environmental Indicators</h3>
+                  
+                </div>
+                <DynamicCardGrid cards={personalizedData.prioritizedCards} />
+              </div>
 
-              {/* Sun & Moon Astronomical Arc */}
-              <SunMoonCard sunData={currentCity.sun} moonData={currentCity.moon} />
+              {/* 4. FORECAST: 7-Day Regional Meteorological Outlook */}
+              <div className="dashboard-section-block forecast-outlook-block">
+                <div className="generic-forecast-table-card">
+                  <div className="generic-section-title-row">
+                    <h3 className="generic-section-title">7-Day Regional Forecast Outlook</h3>
+                    
+                  </div>
+
+                  <div className="forecast-days-grid">
+                    {(currentCity.dailyForecast || []).map((day, idx) => (
+                      <div key={idx} className="forecast-day-card">
+                        <span className="forecast-day-date">{day.day} • {day.date}</span>
+                        <span className="forecast-day-condition">{day.condition}</span>
+                        <div className="forecast-day-temp-range">
+                          <span className="temp-max-pill" title="Max Temp">{day.maxTemp}°C</span>
+                          <span>/</span>
+                          <span className="temp-min-pill" title="Min Temp">{day.minTemp}°C</span>
+                        </div>
+                        <span className="forecast-day-rain">🌧 {day.rainProbability}% rain</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* 5. RAW METEOROLOGICAL DATA: Baseline Surface Station Observations */}
+              <div className="dashboard-section-block raw-station-data-block">
+                <div className="generic-section-title-row">
+                  <h3 className="generic-section-title">Station Meteorological Observations</h3>
+                  
+                </div>
+
+                <section className="observation-metric-strip" id="tour-weather-bar">
+                  <div className="obs-metric-col">
+                    <span className="obs-col-label">Temperature</span>
+                    <div className="obs-col-primary">
+                      <span className="obs-col-val">{(activeScenario?.overrides?.temperature ?? currentCity.current?.temperature)?.toFixed(1)}°C</span>
+                      <span className="obs-col-badge">Feels {(currentCity.current?.feelsLike || currentCity.current?.temperature)?.toFixed(1)}°C</span>
+                    </div>
+                    <span className="obs-col-sub">{activeScenario?.overrides?.condition ?? currentCity.current?.condition ?? 'Partly Cloudy'}</span>
+                  </div>
+
+                  <div className="obs-divider" />
+
+                  <div className="obs-metric-col">
+                    <span className="obs-col-label">Humidity</span>
+                    <div className="obs-col-primary">
+                      <span className="obs-col-val">{activeScenario?.overrides?.humidity ?? currentCity.current?.humidity ?? 60}%</span>
+                      <span className="obs-col-badge">Relative</span>
+                    </div>
+                    <span className="obs-col-sub">Dew Pt {((currentCity.current?.temperature || 28) - (100 - (activeScenario?.overrides?.humidity ?? currentCity.current?.humidity ?? 60)) / 5).toFixed(0)}°C</span>
+                  </div>
+
+                  <div className="obs-divider" />
+
+                  <div className="obs-metric-col">
+                    <span className="obs-col-label">Wind Velocity</span>
+                    <div className="obs-col-primary">
+                      <span className="obs-col-val">{currentCity.current?.wind?.speedKmh || 12.0} km/h</span>
+                      <span className="obs-col-badge">{currentCity.current?.wind?.direction || 'WNW'}</span>
+                    </div>
+                    <span className="obs-col-sub">Surface Anemometer</span>
+                  </div>
+
+                  <div className="obs-divider" />
+
+                  <div className="obs-metric-col">
+                    <span className="obs-col-label">Air Quality</span>
+                    <div className="obs-col-primary">
+                      <span className="obs-col-val">AQI {currentCity.current?.airQuality?.aqi || 109}</span>
+                      <span className="obs-col-badge aqi-status">{currentCity.current?.airQuality?.category || 'Moderate'}</span>
+                    </div>
+                    <span className="obs-col-sub">{currentCity.current?.airQuality?.dominantPollutant || 'PM2.5'} Dominant</span>
+                  </div>
+                </section>
+
+                <details className="climatological-normals-details">
+                  <summary className="climatological-normals-summary">
+                    <span>Climatological Baseline & Station Normals</span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Click to expand</span>
+                  </summary>
+                  <div className="generic-normals-card">
+                    <div className="normal-metric-box">
+                      <span className="normal-metric-label">Normal Max Temp</span>
+                      <span className="normal-metric-val">33.5°C</span>
+                      <span className="normal-metric-desc">Climatological baseline</span>
+                    </div>
+                    <div className="normal-metric-box">
+                      <span className="normal-metric-label">Normal Min Temp</span>
+                      <span className="normal-metric-val">22.8°C</span>
+                      <span className="normal-metric-desc">Night cooling baseline</span>
+                    </div>
+                    <div className="normal-metric-box">
+                      <span className="normal-metric-label">Monthly Rainfall</span>
+                      <span className="normal-metric-val">142 mm</span>
+                      <span className="normal-metric-desc">Monsoon seasonal normal</span>
+                    </div>
+                    <div className="normal-metric-box">
+                      <span className="normal-metric-label">Station Elevation</span>
+                      <span className="normal-metric-val">560 m</span>
+                      <span className="normal-metric-desc">Above Mean Sea Level</span>
+                    </div>
+                  </div>
+                </details>
+
+                <div style={{ marginTop: '1.25rem' }}>
+                  <SunMoonCard sunData={currentCity.sun} moonData={currentCity.moon} />
+                </div>
+              </div>
             </div>
           )}
 
@@ -321,6 +376,58 @@ export default function DashboardPage() {
                   <Sparkles size={14} />
                   <span>Switch to Personalized</span>
                 </button>
+              </div>
+
+              {/* Current Station Meteorological Observations */}
+              <div className="dashboard-section-block">
+                <div className="generic-section-title-row">
+                  <h3 className="generic-section-title">Current Station Meteorological Observations</h3>
+                  <span className="badge-v2">Official Surface Observations</span>
+                </div>
+
+                <section className="observation-metric-strip" id="tour-weather-bar-generic">
+                  <div className="obs-metric-col">
+                    <span className="obs-col-label">Temperature</span>
+                    <div className="obs-col-primary">
+                      <span className="obs-col-val">{(activeScenario?.overrides?.temperature ?? currentCity.current?.temperature)?.toFixed(1)}°C</span>
+                      <span className="obs-col-badge">Feels {(currentCity.current?.feelsLike || currentCity.current?.temperature)?.toFixed(1)}°C</span>
+                    </div>
+                    <span className="obs-col-sub">{activeScenario?.overrides?.condition ?? currentCity.current?.condition ?? 'Partly Cloudy'}</span>
+                  </div>
+
+                  <div className="obs-divider" />
+
+                  <div className="obs-metric-col">
+                    <span className="obs-col-label">Humidity</span>
+                    <div className="obs-col-primary">
+                      <span className="obs-col-val">{activeScenario?.overrides?.humidity ?? currentCity.current?.humidity ?? 60}%</span>
+                      <span className="obs-col-badge">Relative</span>
+                    </div>
+                    <span className="obs-col-sub">Dew Pt {((currentCity.current?.temperature || 28) - (100 - (activeScenario?.overrides?.humidity ?? currentCity.current?.humidity ?? 60)) / 5).toFixed(0)}°C</span>
+                  </div>
+
+                  <div className="obs-divider" />
+
+                  <div className="obs-metric-col">
+                    <span className="obs-col-label">Wind Velocity</span>
+                    <div className="obs-col-primary">
+                      <span className="obs-col-val">{currentCity.current?.wind?.speedKmh || 12.0} km/h</span>
+                      <span className="obs-col-badge">{currentCity.current?.wind?.direction || 'WNW'}</span>
+                    </div>
+                    <span className="obs-col-sub">Surface Anemometer</span>
+                  </div>
+
+                  <div className="obs-divider" />
+
+                  <div className="obs-metric-col">
+                    <span className="obs-col-label">Air Quality</span>
+                    <div className="obs-col-primary">
+                      <span className="obs-col-val">AQI {currentCity.current?.airQuality?.aqi || 109}</span>
+                      <span className="obs-col-badge aqi-status">{currentCity.current?.airQuality?.category || 'Moderate'}</span>
+                    </div>
+                    <span className="obs-col-sub">{currentCity.current?.airQuality?.dominantPollutant || 'PM2.5'} Dominant</span>
+                  </div>
+                </section>
               </div>
 
               {/* 7-Day IMD Forecast Grid */}
@@ -374,24 +481,14 @@ export default function DashboardPage() {
               <SunMoonCard sunData={currentCity.sun} moonData={currentCity.moon} />
             </div>
           )}
-
-          {/* Session Persistence Verification Banner */}
-          <section className="persistence-notice-card" id="session-persistence-indicator">
-            <div className="notice-icon-box">
-              <CheckCircle2 size={24} className="text-emerald" />
-            </div>
-            <div className="notice-text">
-              <h4>Official Session & Station Persistence Verified</h4>
-              <p>
-                Authentication state (<code>isLoggedIn: true</code>), active persona (
-                <code>activePersona: "{activePersonaKey}"</code>), station (
-                <code>station: "{currentCity.cityName}"</code>), and mode (
-                <code>viewMode: "{viewMode}"</code>) are saved in LocalStorage.
-              </p>
-            </div>
-          </section>
         </div>
       </main>
+
+      {/* Official IMD Public Service Footer */}
+      <Footer onOpenTour={() => setIsTourOpen(true)} />
+
+      {/* Subtle Back-to-Top Control */}
+      <BackToTop />
 
       {/* Mobile Bottom Navigation Bar */}
       <nav className="mobile-bottom-nav" aria-label="Mobile Navigation">
@@ -440,8 +537,8 @@ export default function DashboardPage() {
         <ProfileModal
           isOpen={showProfile}
           onClose={() => setShowProfile(false)}
-          onLogout={() => {
-            logout();
+          onLogout={async () => {
+            await logout();
             setShowProfile(false);
           }}
         />

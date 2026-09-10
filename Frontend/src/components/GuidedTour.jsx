@@ -1,18 +1,3 @@
-/**
- * GuidedTour.jsx
- * 
- * Part 1: Guided Tour Synchronization
- * 
- * Solves:
- * - Dynamic viewport tracking using fixed positioning (no stale scrollY additions).
- * - Target scroll-into-view with sticky header clearance (min 80px top buffer).
- * - Smooth scroll settling with requestAnimationFrame and multi-stage re-measuring.
- * - Intelligent dialog positioning (below target if space allows, above target if in lower viewport).
- * - Real-time synchronization when user scrolls or resizes.
- * - Clean cleanup on X/Skip/Finish with zero residual scroll lock or overlays.
- * - Graceful fallback if target element is not in DOM.
- */
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Lightbulb, ChevronRight, ChevronLeft, X, Check } from 'lucide-react';
 
@@ -65,7 +50,6 @@ export default function GuidedTour({ isOpen, onClose }) {
   const [dialogStyle, setDialogStyle] = useState({ top: 100, left: 16 });
   const rafRef = useRef(null);
 
-  // Position highlight box and dialog over current DOM target
   const measureAndPosition = useCallback(() => {
     const step = TOUR_STEPS[activeStep];
     if (!step) return;
@@ -73,7 +57,6 @@ export default function GuidedTour({ isOpen, onClose }) {
     const el = document.getElementById(step.targetId);
     if (!el) {
       setTargetRect(null);
-      // Fallback dialog position to viewport center if element is missing
       setDialogStyle({
         top: Math.max(80, (window.innerHeight - 280) / 2),
         left: Math.max(16, (window.innerWidth - 440) / 2),
@@ -89,36 +72,29 @@ export default function GuidedTour({ isOpen, onClose }) {
       height: rect.height,
     });
 
-    // Compute intelligent dialog placement
     const dialogWidth = Math.min(440, window.innerWidth - 32);
     const dialogEstimatedHeight = 260;
-    const headerHeight = 75; // sticky header buffer
+    const headerHeight = 75;
 
-    // Horizontal placement: center horizontally relative to target, clamped to viewport
     const targetCenterX = rect.left + rect.width / 2;
     let dialogLeft = targetCenterX - dialogWidth / 2;
     dialogLeft = Math.max(16, Math.min(window.innerWidth - dialogWidth - 16, dialogLeft));
 
-    // Vertical placement:
     const spaceBelow = window.innerHeight - rect.bottom;
     const spaceAbove = rect.top - headerHeight;
 
     let dialogTop;
     if (spaceBelow >= dialogEstimatedHeight + 20) {
-      // Space below target
       dialogTop = rect.bottom + 14;
     } else if (spaceAbove >= dialogEstimatedHeight + 20) {
-      // Space above target
       dialogTop = rect.top - dialogEstimatedHeight - 14;
     } else {
-      // Target occupies most of viewport, place dialog near bottom of screen safely
       dialogTop = Math.max(headerHeight + 10, window.innerHeight - dialogEstimatedHeight - 20);
     }
 
     setDialogStyle({ top: dialogTop, left: dialogLeft });
   }, [activeStep]);
 
-  // Scroll target into view when step changes
   useEffect(() => {
     if (!isOpen) return;
 
@@ -129,7 +105,6 @@ export default function GuidedTour({ isOpen, onClose }) {
     if (el) {
       const rect = el.getBoundingClientRect();
       const headerOffset = 80;
-      // Scroll if element is hidden behind sticky header or below viewport
       if (rect.top < headerOffset || rect.bottom > window.innerHeight - 40) {
         const targetScrollTop = window.scrollY + rect.top - headerOffset - 20;
         window.scrollTo({
@@ -139,7 +114,6 @@ export default function GuidedTour({ isOpen, onClose }) {
       }
     }
 
-    // Schedule re-measurement during and after smooth scroll settling
     measureAndPosition();
     const t1 = setTimeout(measureAndPosition, 100);
     const t2 = setTimeout(measureAndPosition, 250);
@@ -154,7 +128,6 @@ export default function GuidedTour({ isOpen, onClose }) {
     };
   }, [isOpen, activeStep, measureAndPosition]);
 
-  // Continuous listener on window scroll & resize using requestAnimationFrame
   useEffect(() => {
     if (!isOpen) return;
 
@@ -173,7 +146,6 @@ export default function GuidedTour({ isOpen, onClose }) {
     };
   }, [isOpen, measureAndPosition]);
 
-  // Handle Escape key to close tour
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e) => {
@@ -221,7 +193,6 @@ export default function GuidedTour({ isOpen, onClose }) {
 
   return (
     <div className="guided-tour-backdrop" role="dialog" aria-modal="true" aria-label="First-Time Guided Tour">
-      {/* Target Element Spotlight Outline (fixed positioning matching viewport) */}
       {targetRect && (
         <div
           className="tour-spotlight-box"
@@ -236,7 +207,6 @@ export default function GuidedTour({ isOpen, onClose }) {
         </div>
       )}
 
-      {/* Floating Guided Tour Card positioned intelligently */}
       <div
         className="tour-card"
         role="dialog"

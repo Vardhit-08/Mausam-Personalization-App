@@ -1,9 +1,3 @@
-/**
- * SunMoonCard.jsx
- * 
- * Sunrise, Sunset and Solar Arc Visualization component for SIH26076 Mausam.
- */
-
 import React from 'react';
 import { Sunrise, Sunset, Moon } from 'lucide-react';
 

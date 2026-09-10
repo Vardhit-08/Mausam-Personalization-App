@@ -1,9 +1,3 @@
-/**
- * DailyForecastList.jsx
- * 
- * 7-Day Weather Forecast component for SIH26076 Mausam.
- */
-
 import React from 'react';
 import { Calendar, CloudRain, Sun, Cloud, CloudLightning } from 'lucide-react';
 

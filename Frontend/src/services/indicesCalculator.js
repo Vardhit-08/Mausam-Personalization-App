@@ -1,54 +1,18 @@
-/**
- * indicesCalculator.js
- * 
- * Deterministic and explainable algorithmic weather index calculations for SIH26076 Mausam.
- * 
- * Implements:
- * 1. Sweat Risk Score (0-100)
- * 2. Exercise Comfort Index (0-100)
- * 3. Outdoor Comfort Score (0-100)
- * 4. Travel Comfort Index (0-100)
- * 5. Commute Risk Score (Low / Moderate / High)
- * 6. Agricultural Operations & Spray Window Index
- * 
- * Note: These are environmental decision-support indicators and are NOT medical diagnoses.
- */
-
 const ENVIRONMENTAL_DISCLAIMER = 'Environmental decision-support indicator, not a medical or clinical diagnosis.';
 
-/**
- * 1. Sweat Risk Score (0 - 100)
- * Evaluates thermoregulatory heat stress and sweat evaporation impairment.
- * Inputs: temp (°C), humidity (%), UV index (0-12), wind speed (km/h), rain probability (%)
- */
 export function calculateSweatRisk({ temperature, humidity, uvIndex, windSpeed, rainProbability = 0 }) {
   const temp = !isNaN(Number(temperature)) ? Number(temperature) : 28;
   const rh = !isNaN(Number(humidity)) ? Number(humidity) : 50;
   const uv = Number(uvIndex?.value !== undefined ? uvIndex.value : uvIndex) || 5;
   const wind = !isNaN(Number(windSpeed)) ? Number(windSpeed) : 10;
   const rain = Number(rainProbability) || 0;
-
-  // Temperature factor: 18°C neutral, <18°C minimal sweat risk, 38°C+ extreme
   const tempFactor = Math.max(0, Math.min(100, (temp - 18) * 4.5));
-
-  // Humidity factor: Evaporative cooling drops significantly above 55% RH
   const rhFactor = Math.max(0, Math.min(100, (rh - 40) * 1.5));
-
-  // Solar radiation contribution (UV adds direct radiant heat load)
   const uvFactor = Math.max(0, Math.min(100, uv * 8.5));
-
-  // Wind mitigates sweat build-up via convective cooling
   const windDiscount = Math.max(0, Math.min(25, wind * 1.2));
-
-  // Rain moisture contribution to ambient wetness
   const rainFactor = Math.max(0, Math.min(15, rain * 0.18));
-
-  // Weighted raw calculation
   let rawScore = (tempFactor * 0.45) + (rhFactor * 0.35) + (uvFactor * 0.15) + rainFactor - windDiscount;
-  
-  // Boundary clamping (0 - 100)
   const score = Math.max(0, Math.min(100, Math.round(rawScore)));
-
   let category = 'LOW';
   let categoryColor = 'text-emerald';
   let recommendation = 'Normal perspiration expected. Standard fluid replenishment is sufficient.';
@@ -86,10 +50,6 @@ export function calculateSweatRisk({ temperature, humidity, uvIndex, windSpeed, 
   };
 }
 
-/**
- * 2. Exercise Comfort Index (0 - 100)
- * Evaluates running, cycling and outdoor sports conditions.
- */
 export function calculateExerciseComfort({ temperature, humidity, uvIndex, windSpeed, rainProbability = 0 }) {
   const temp = !isNaN(Number(temperature)) ? Number(temperature) : 28;
   const rh = !isNaN(Number(humidity)) ? Number(humidity) : 50;
@@ -97,24 +57,19 @@ export function calculateExerciseComfort({ temperature, humidity, uvIndex, windS
   const wind = !isNaN(Number(windSpeed)) ? Number(windSpeed) : 10;
   const rain = Number(rainProbability) || 0;
 
-  // Ideal running temperature is 12°C - 20°C
   let tempPenalty = 0;
   if (temp < 12) {
-    tempPenalty = (12 - temp) * 2.5; // Cold penalty
+    tempPenalty = (12 - temp) * 2.5;
   } else if (temp > 20) {
-    tempPenalty = (temp - 20) * 3.5; // Heat penalty
+    tempPenalty = (temp - 20) * 3.5;
   }
 
-  // Humidity penalty (hinders respiration and evaporation)
   const rhPenalty = rh > 60 ? (rh - 60) * 0.8 : 0;
 
-  // Rain penalty
   const rainPenalty = rain * 0.5;
 
-  // Extreme wind penalty (>20 km/h creates heavy resistance or chilled draft)
   const windPenalty = wind > 20 ? (wind - 20) * 1.5 : 0;
 
-  // UV penalty (peak solar radiation penalty)
   const uvPenalty = uv > 6 ? (uv - 6) * 4 : 0;
 
   const deductions = tempPenalty + rhPenalty + rainPenalty + windPenalty + uvPenalty;
@@ -134,7 +89,6 @@ export function calculateExerciseComfort({ temperature, humidity, uvIndex, windS
     message = 'Acceptable for moderate exercise. Hydrate frequently and pace yourself.';
   }
 
-  // Dynamic best window prediction based on temperature
   let bestWindow = '6:00 AM – 8:00 AM';
   let worstWindow = '12:30 PM – 4:00 PM';
   if (temp > 35) {
@@ -166,10 +120,6 @@ export function calculateExerciseComfort({ temperature, humidity, uvIndex, windS
   };
 }
 
-/**
- * 3. Outdoor Comfort Score (0 - 100)
- * Evaluates environmental health comfort: AQI, pollen, UV, humidity, temperature.
- */
 export function calculateOutdoorComfort({ airQuality, pollen, uvIndex, temperature, humidity }) {
   const aqi = Number(airQuality?.aqi !== undefined ? airQuality.aqi : airQuality) || 80;
   const pollenVal = Number(pollen?.index !== undefined ? pollen.index : (pollen === 'High' ? 8 : pollen === 'Moderate' ? 4 : 2)) || 4;
@@ -177,7 +127,6 @@ export function calculateOutdoorComfort({ airQuality, pollen, uvIndex, temperatu
   const temp = !isNaN(Number(temperature)) ? Number(temperature) : 28;
   const rh = !isNaN(Number(humidity)) ? Number(humidity) : 50;
 
-  // Deduct based on air pollutants
   let aqiDeduction = 0;
   if (aqi > 200) {
     aqiDeduction = 35 + (aqi - 200) * 0.35;
@@ -187,18 +136,11 @@ export function calculateOutdoorComfort({ airQuality, pollen, uvIndex, temperatu
     aqiDeduction = (aqi - 50) * 0.1;
   }
 
-  // Pollen deduction
   const pollenDeduction = pollenVal > 4 ? (pollenVal - 4) * 6 : 0;
-  
-  // UV deduction
   const uvDeduction = uv > 6 ? (uv - 6) * 4.5 : 0;
-
-  // Discomfort from heat + humidity
   const thermalDeduction = (temp > 30 ? (temp - 30) * 2.8 : 0) + (rh > 70 ? (rh - 70) * 0.4 : 0);
-
   const totalDeductions = aqiDeduction + pollenDeduction + uvDeduction + thermalDeduction;
   const score = Math.max(5, Math.min(100, Math.round(100 - totalDeductions)));
-
   let status = 'GOOD';
   let summary = 'Clean air and comfortable environmental conditions for outdoor presence.';
 
@@ -231,10 +173,6 @@ export function calculateOutdoorComfort({ airQuality, pollen, uvIndex, temperatu
   };
 }
 
-/**
- * 4. Travel Comfort Index (0 - 100)
- * Evaluates flight/road travel ease, rain probability, wind, visibility, and severe alerts.
- */
 export function calculateTravelComfort({ rainProbability, windSpeed, visibility = 6, severeAlerts = [] }) {
   const rain = Number(rainProbability) || 20;
   const wind = Number(windSpeed) || 12;
@@ -278,10 +216,6 @@ export function calculateTravelComfort({ rainProbability, windSpeed, visibility 
   };
 }
 
-/**
- * 5. Commute Risk Score (Low / Moderate / High)
- * Evaluates road traffic weather hazards: visibility, rain probability, wind, fog risk, storms.
- */
 export function calculateCommuteRisk({ rainProbability, visibility = 5, windSpeed, condition = '' }) {
   const rain = Number(rainProbability) || 20;
   const vis = Number(visibility) || 5;
@@ -339,21 +273,11 @@ export function calculateCommuteRisk({ rainProbability, visibility = 5, windSpee
   };
 }
 
-/**
- * 6. Agricultural Operations & Spray Window Index
- * Evaluates chemical spraying suitability, soil moisture retention, and drift risks.
- */
 export function calculateAgriConditions({ windSpeed, rainProbability = 0, humidity = 60, temperature = 28 }) {
   const wind = Number(windSpeed) || 10;
   const rain = Number(rainProbability) || 0;
   const rh = Number(humidity) || 60;
   const temp = Number(temperature) || 28;
-
-  // Ideal foliar spraying criteria:
-  // Wind: 5 - 14 km/h (too low < 3 causes temperature inversion drift; > 15 causes mechanical drift)
-  // Rain: < 20% in next 12 hours (washoff risk)
-  // Humidity: 40% - 75% (prevent rapid droplet evaporation or slow drying)
-  // Temp: < 32°C (prevents volatilization)
 
   let isSpraySafe = true;
   let sprayWindow = 'Favorable (Next 6h)';
@@ -372,7 +296,6 @@ export function calculateAgriConditions({ windSpeed, rainProbability = 0, humidi
     sprayAdvice = 'Light wind inversion risk. Ensure ground droplet size is calibrated.';
   }
 
-  // Estimated evapotranspiration (ET0) based on temp and humidity
   const et0 = Math.max(1.5, Math.min(9.5, ((temp * 0.15) + ((100 - rh) * 0.04))).toFixed(1));
 
   const soilMoistureEstimate = rain > 60 ? '85% (Near Saturation)' : rain > 25 ? '72% (Field Capacity)' : '58% (Moderate)';

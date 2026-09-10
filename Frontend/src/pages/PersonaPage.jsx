@@ -1,17 +1,3 @@
-/**
- * PersonaPage.jsx
- * 
- * Part 3: Persona Selection Flow & Grid
- * 
- * Features:
- * - 4 Primary demo personas (Fitness, Traveler, Health, Commuter) + Agriculture prominently featured.
- * - Architecture compatibility with full 8-persona vision from Mausam-personalization docx.
- * - Clear selected state with checkmark indicators and institutional accent borders.
- * - Tailored meteorological preview tags for each persona.
- * - Upcoming domain profiles (Parents & Families, Event Planners, Coastal & Marine) displayed with v2.0 badge.
- * - Canonical persistence via useAuth().selectPersona().
- */
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
@@ -167,12 +153,11 @@ export default function PersonaPage() {
             </div>
             <h1 className="persona-title">Choose Your Primary Weather Persona</h1>
             <p className="persona-subtitle">
-              Welcome, <strong>{currentUser?.name || currentUser?.email?.split('@')[0] || 'Meteorology Explorer'}</strong>. 
+              Welcome, <strong>{currentUser?.name || currentUser?.email?.split('@')[0] || 'Meteorology Explorer'}</strong>.
               Mausam reorganizes raw IMD radar, air quality, and forecast data into plain-language guidance tailored to your daily activities.
             </p>
           </div>
 
-          {/* Primary Personas Grid */}
           <div className="persona-section-title-row">
             <h2 className="persona-section-heading">Primary Operational Profiles</h2>
             <span className="persona-section-caption">Select one profile to prioritize on your dashboard</span>
@@ -236,7 +221,6 @@ export default function PersonaPage() {
             })}
           </div>
 
-          {/* Architecture Compatibility Section (Upcoming Personas) */}
           <div className="upcoming-personas-section">
             <div className="upcoming-header">
               <div>
@@ -270,7 +254,6 @@ export default function PersonaPage() {
             </div>
           </div>
 
-          {/* Action Footer */}
           <div className="persona-action-footer">
             <button
               type="button"

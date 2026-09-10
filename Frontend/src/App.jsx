@@ -42,10 +42,6 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Root route:
-              - Logged Out -> LandingPage
-              - Logged In + No Persona -> /persona
-              - Logged In + Persona -> /dashboard */}
           <Route
             path="/"
             element={
@@ -55,10 +51,6 @@ export default function App() {
             }
           />
 
-          {/* Public Auth routes:
-              - Logged Out -> Form
-              - Logged In + No Persona -> /persona
-              - Logged In + Persona -> /dashboard */}
           <Route
             path="/login"
             element={
@@ -84,10 +76,6 @@ export default function App() {
             }
           />
 
-          {/* Persona onboarding route:
-              - Logged Out -> /
-              - Logged In + No Persona -> PersonaPage
-              - Logged In + Persona -> /dashboard */}
           <Route
             path="/persona"
             element={
@@ -97,10 +85,6 @@ export default function App() {
             }
           />
 
-          {/* Protected dashboard route:
-              - Logged Out -> /
-              - Logged In + No Persona -> /persona
-              - Logged In + Persona -> DashboardPage */}
           <Route
             path="/dashboard"
             element={
@@ -110,7 +94,6 @@ export default function App() {
             }
           />
 
-          {/* Fallback to root */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

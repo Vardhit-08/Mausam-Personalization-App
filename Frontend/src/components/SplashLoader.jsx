@@ -1,203 +1,96 @@
 /**
  * SplashLoader.jsx
  * 
- * Official IMD Mausam Application Entry / Splash Experience.
+ * Official IMD Mausam Application Entry Sequence.
  * 
- * Screens:
- * - Screen 01: Government of India + India Meteorological Department identity.
- * - Screen 02: Mausam Unified Brand & IMD official emblem.
- * - Screen 03: Personalization Introduction ("India's own personalized weather app").
+ * Sequence Flow (Restrained, Professional & Institutional):
+ * Stage 1: Government of India & IMD Identity
+ *    ↓ Soft crossfade
+ * Stage 2: Mausam Identity & Subtle Wordmark Entrance
+ *    ↓ Smooth transition
+ * Stage 3 / Complete: Enter Application
  * 
- * Features:
- * - Dynamic atmospheric weather theme (rain, storm, clouds, sunrise, wind, mist).
- * - Non-repeating shuffle-bag algorithm remembering last theme across launches.
- * - Seamless loop fallback, smooth crossfade transitions, responsive across mobile & desktop.
- * - Accessible controls (Skip / Continue buttons) with ARIA live announcements.
+ * Respects prefers-reduced-motion, provides immediate skip option,
+ * and maintains official branding without artificial delays or particle effects.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import govLogo from '../assets/branding/gov-logo.png';
 import imdLogo from '../assets/branding/imd-logo.png';
-import { CloudRain, Sun, Wind, CloudLightning, Sparkles, ArrowRight } from 'lucide-react';
 
-const WEATHER_THEMES = ['rain', 'storm', 'clouds', 'sunrise', 'wind', 'mist'];
+export default function SplashLoader({ onComplete, autoAdvance = true, message = 'Initializing Mausam...' }) {
+  const [stage, setStage] = useState(1); // 1 = IMD / Govt, 2 = Mausam Identity, 3 = Transition out
+  const [isExiting, setIsExiting] = useState(false);
 
-/**
- * Pick next theme using a non-immediate repeating shuffle-bag
- */
-function getNextWeatherTheme() {
-  try {
-    const lastTheme = localStorage.getItem('lastSplashBackground');
-    const eligible = WEATHER_THEMES.filter((t) => t !== lastTheme);
-    const nextTheme = eligible[Math.floor(Math.random() * eligible.length)] || 'rain';
-    localStorage.setItem('lastSplashBackground', nextTheme);
-    return nextTheme;
-  } catch {
-    return 'clouds';
-  }
-}
-
-export default function SplashLoader({ onComplete, autoAdvance = true, _message = 'Initializing Mausam...' }) {
-  const [currentScreen, setCurrentScreen] = useState(1); // 1, 2, or 3
-  const [theme] = useState(() => getNextWeatherTheme());
-  const canvasRef = useRef(null);
-
-  // Auto-advance stages if enabled
   useEffect(() => {
-    if (!autoAdvance) return;
+    // Check for reduced motion preference
+    const prefersReducedMotion = typeof window !== 'undefined' && 
+      window.matchMedia && 
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion && onComplete) {
+      // Rapid exit for users with reduced motion preference
+      const instantTimer = setTimeout(() => {
+        onComplete();
+      }, 500);
+      return () => clearTimeout(instantTimer);
+    }
+
+    if (!autoAdvance || !onComplete) return;
 
     let timer;
-    if (currentScreen === 1) {
-      timer = setTimeout(() => setCurrentScreen(2), 1600);
-    } else if (currentScreen === 2) {
-      timer = setTimeout(() => setCurrentScreen(3), 1600);
-    } else if (currentScreen === 3 && onComplete) {
+    if (stage === 1) {
+      timer = setTimeout(() => setStage(2), 1100);
+    } else if (stage === 2) {
       timer = setTimeout(() => {
-        onComplete();
-      }, 2000);
+        setIsExiting(true);
+        setTimeout(() => {
+          onComplete();
+        }, 350);
+      }, 1200);
     }
 
     return () => clearTimeout(timer);
-  }, [currentScreen, autoAdvance, onComplete]);
+  }, [stage, autoAdvance, onComplete]);
 
-  // Atmospheric background canvas animation (rain, wind, mist, storm particles)
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let animationFrameId;
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Particle system based on theme
-    const particles = [];
-    const count = theme === 'rain' ? 80 : theme === 'storm' ? 100 : 35;
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        length: Math.random() * 20 + 10,
-        speed: Math.random() * 6 + 4,
-        opacity: Math.random() * 0.5 + 0.2,
-      });
-    }
-
-    let stormFlash = 0;
-
-    const render = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      if (theme === 'rain' || theme === 'storm') {
-        ctx.strokeStyle = theme === 'storm' ? 'rgba(200, 225, 255, 0.4)' : 'rgba(147, 197, 253, 0.35)';
-        ctx.lineWidth = 1.5;
-        particles.forEach((p) => {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p.x - 2, p.y + p.length);
-          ctx.stroke();
-
-          p.y += p.speed;
-          p.x -= 1;
-          if (p.y > canvas.height) {
-            p.y = -20;
-            p.x = Math.random() * canvas.width;
-          }
-        });
-
-        // Occasional subtle lightning flash for storm
-        if (theme === 'storm') {
-          if (Math.random() < 0.01) stormFlash = 0.25;
-          if (stormFlash > 0) {
-            ctx.fillStyle = `rgba(255, 255, 255, ${stormFlash})`;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            stormFlash -= 0.03;
-          }
-        }
-      } else if (theme === 'mist' || theme === 'clouds') {
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
-        particles.forEach((p) => {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.length * 3, 0, Math.PI * 2);
-          ctx.fill();
-          p.x += 0.3;
-          if (p.x > canvas.width + 50) p.x = -50;
-        });
-      } else if (theme === 'wind') {
-        ctx.strokeStyle = 'rgba(186, 230, 253, 0.15)';
-        ctx.lineWidth = 1;
-        particles.forEach((p) => {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p.x + p.length * 2, p.y);
-          ctx.stroke();
-          p.x += p.speed * 1.5;
-          if (p.x > canvas.width) {
-            p.x = -60;
-            p.y = Math.random() * canvas.height;
-          }
-        });
-      } else if (theme === 'sunrise') {
-        const gradient = ctx.createRadialGradient(
-          canvas.width / 2,
-          canvas.height * 0.85,
-          10,
-          canvas.width / 2,
-          canvas.height * 0.85,
-          canvas.width * 0.6
-        );
-        gradient.addColorStop(0, 'rgba(245, 158, 11, 0.18)');
-        gradient.addColorStop(1, 'rgba(6, 25, 56, 0)');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [theme]);
-
-  const handleSkipOrProceed = () => {
+  const handleSkip = () => {
     if (onComplete) {
-      onComplete();
-    } else if (currentScreen < 3) {
-      setCurrentScreen(currentScreen + 1);
+      setIsExiting(true);
+      setTimeout(onComplete, 150);
+    } else if (stage < 2) {
+      setStage(2);
     }
   };
 
+  // Minimal route fallback loader if no onComplete provided
+  if (!onComplete) {
+    return (
+      <div className="splash-route-fallback-container" role="status" aria-label="Loading">
+        <div className="splash-fallback-card">
+          <img src={imdLogo} alt="IMD Logo" className="splash-fallback-logo" />
+          <div className="splash-fallback-text">
+            <span className="splash-fallback-title">मौसम MAUSAM</span>
+            <span className="splash-fallback-sub">{message}</span>
+          </div>
+          <div className="splash-fallback-spinner" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
-      className={`splash-experience-container theme-${theme}`}
+      className={`splash-experience-container ${isExiting ? 'splash-exiting' : ''}`}
       role="dialog"
       aria-modal="true"
-      aria-label="Application Entry"
+      aria-label="Official Mausam Application Entry"
+      onClick={handleSkip}
     >
-      {/* Background Canvas for Atmospheric Weather Effects */}
-      <canvas ref={canvasRef} className="splash-ambient-canvas" aria-hidden="true" />
-      <div className="splash-dark-overlay" aria-hidden="true" />
+      <div className="splash-subtle-gradient" aria-hidden="true" />
 
-      {/* Weather Theme Kicker Indicator */}
-      <div className="splash-theme-indicator">
-        {theme === 'rain' && <CloudRain size={14} />}
-        {theme === 'storm' && <CloudLightning size={14} />}
-        {theme === 'sunrise' && <Sun size={14} />}
-        {theme === 'wind' && <Wind size={14} />}
-        <span>Atmospheric Theme: {theme.toUpperCase()}</span>
-      </div>
-
-      <div className="splash-screen-card">
-        {/* SCREEN 01: Government of India + IMD Identity */}
-        {currentScreen === 1 && (
+      <div className="splash-screen-card" onClick={(e) => e.stopPropagation()}>
+        {/* STAGE 1: Government of India + India Meteorological Department */}
+        {stage === 1 && (
           <div className="splash-stage stage-1" key="stage-1">
             <div className="splash-gov-emblem-wrap">
               <img src={govLogo} alt="Government of India Emblem" className="splash-gov-logo" />
@@ -220,84 +113,33 @@ export default function SplashLoader({ onComplete, autoAdvance = true, _message 
           </div>
         )}
 
-        {/* SCREEN 02: Mausam Identity */}
-        {currentScreen === 2 && (
+        {/* STAGE 2: Mausam Identity & Subtle Wordmark Entrance */}
+        {stage === 2 && (
           <div className="splash-stage stage-2" key="stage-2">
             <div className="splash-mausam-logo-box">
               <img src={imdLogo} alt="IMD Official Logo" className="splash-mausam-logo" />
             </div>
             <h1 className="splash-mausam-wordmark">मौसम MAUSAM</h1>
-            <p className="splash-mausam-subtitle">Unified Weather Portal & Mobile Services</p>
+            <p className="splash-mausam-subtitle">National Weather Personalization Engine</p>
             <span className="splash-mausam-author">India Meteorological Department</span>
           </div>
         )}
 
-        {/* SCREEN 03: Personalization Introduction */}
-        {currentScreen === 3 && (
-          <div className="splash-stage stage-3" key="stage-3">
-            <div className="splash-intro-badge">
-              <Sparkles size={16} className="text-amber" />
-              <span>SIH 26076 Personalization Layer</span>
-            </div>
-
-            <h2 className="splash-intro-heading">India&apos;s own personalized weather app</h2>
-            <p className="splash-intro-sub">
-              Powered by <strong>India Meteorological Department</strong> and the{' '}
-              <strong>Ministry of Earth Sciences</strong>.
-            </p>
-
-            <p className="splash-intro-desc">
-              Transforming raw meteorological indicators into actionable, plain-English guidance tailored to your daily
-              routine, health, and commute.
-            </p>
-
-            <div className="splash-intro-action-row">
-              <button
-                type="button"
-                className="btn btn-primary btn-lg splash-continue-btn"
-                onClick={handleSkipOrProceed}
-                id="splash-continue-btn"
-              >
-                <span>Continue</span>
-                <ArrowRight size={18} />
-              </button>
-            </div>
+        {/* Subtle Skip / Advance Control */}
+        <div className="splash-footer-control">
+          <div className="splash-stage-dots" aria-hidden="true">
+            <span className={`splash-dot ${stage === 1 ? 'active' : ''}`} />
+            <span className={`splash-dot ${stage === 2 ? 'active' : ''}`} />
           </div>
-        )}
-
-        {/* Stage Navigation Dots */}
-        <div className="splash-dots-row">
-          <button
-            type="button"
-            className={`splash-dot ${currentScreen === 1 ? 'active' : ''}`}
-            onClick={() => setCurrentScreen(1)}
-            aria-label="Screen 1: Government Identity"
-          />
-          <button
-            type="button"
-            className={`splash-dot ${currentScreen === 2 ? 'active' : ''}`}
-            onClick={() => setCurrentScreen(2)}
-            aria-label="Screen 2: Mausam Identity"
-          />
-          <button
-            type="button"
-            className={`splash-dot ${currentScreen === 3 ? 'active' : ''}`}
-            onClick={() => setCurrentScreen(3)}
-            aria-label="Screen 3: Personalization Intro"
-          />
-        </div>
-
-        {/* Skip action for fast entry */}
-        {currentScreen < 3 && (
           <button
             type="button"
             className="splash-skip-link"
-            onClick={handleSkipOrProceed}
-            id="splash-skip-btn"
+            onClick={handleSkip}
+            title="Skip directly to application"
           >
-            Skip Intro →
+            Enter Mausam →
           </button>
-        )}
+        </div>
       </div>
     </div>
   );

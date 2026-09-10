@@ -1,10 +1,3 @@
-/**
- * alertService.js
- * 
- * Context-aware weather alert generator and fatigue protection layer for SIH26076 Mausam (Part 12).
- * Integrates with frontend notificationAdapter for clean separation of concerns.
- */
-
 import {
   ingestNotification,
   getStoredNotifications,
@@ -21,13 +14,9 @@ export {
   dismissNotification,
 };
 
-// Backwards compatibility aliases
 export const markNotificationAsRead = markAsRead;
 export const markAllNotificationsAsRead = markAllAsRead;
 
-/**
- * Generates proactive context-aware alert based on persona & weather shifts
- */
 export function evaluateProactiveAlerts({
   persona = 'fitness',
   rainProbability = 30,
@@ -40,7 +29,6 @@ export function evaluateProactiveAlerts({
   const alertsToDispatch = [];
   const now = Date.now();
 
-  // 1. Fitness Rain Alert
   if (persona === 'fitness' && rainProbability >= 70) {
     alertsToDispatch.push({
       id: `alert-fitness-rain-${Math.floor(now / DEFAULT_COOLDOWN_MS)}`,
@@ -56,7 +44,6 @@ export function evaluateProactiveAlerts({
     });
   }
 
-  // 2. Commuter Hazard Alert
   if (persona === 'commuter' && (rainProbability >= 65 || visibility < 3.0 || isStorm)) {
     alertsToDispatch.push({
       id: `alert-commuter-hazard-${Math.floor(now / DEFAULT_COOLDOWN_MS)}`,
@@ -74,7 +61,6 @@ export function evaluateProactiveAlerts({
     });
   }
 
-  // 3. Traveler Destination Alert
   if (persona === 'traveler' && (rainProbability >= 60 || isStorm)) {
     alertsToDispatch.push({
       id: `alert-traveler-dest-${Math.floor(now / DEFAULT_COOLDOWN_MS)}`,
@@ -90,7 +76,6 @@ export function evaluateProactiveAlerts({
     });
   }
 
-  // 4. Health Air Quality Alert
   if (persona === 'health' && aqi >= 150) {
     alertsToDispatch.push({
       id: `alert-health-aqi-${Math.floor(now / DEFAULT_COOLDOWN_MS)}`,
@@ -106,7 +91,6 @@ export function evaluateProactiveAlerts({
     });
   }
 
-  // 5. Agriculture Spray / Rain Alert
   if (persona === 'agriculture' && (rainProbability >= 60 || isStorm)) {
     alertsToDispatch.push({
       id: `alert-agri-spray-${Math.floor(now / DEFAULT_COOLDOWN_MS)}`,

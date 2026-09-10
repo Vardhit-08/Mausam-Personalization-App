@@ -1,36 +1,17 @@
-/**
- * supabase.js
- * 
- * Centralized Supabase Client and Application Data Service for SIH26076 Mausam.
- * 
- * Responsibilities:
- * - Supabase owns Application Backend / PostgreSQL Data (User Profiles, Preferences, Saved Locations).
- * - Firebase owns User Authentication / Identity (Firebase UID).
- * - The Firebase UID acts as the foreign key: user_id VARCHAR(128) references users(id).
- * 
- * Includes an offline-resilient local cache fallback for hackathon stage presentations.
- */
-
 import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://xyzcompany.supabase.co';
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.demo-key-mausam-sih26076';
 
-// Supabase client instance
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const LOCAL_PROFILE_CACHE_KEY = 'mausam_supabase_profile_cache';
 const LOCAL_LOCATIONS_KEY = 'mausam_saved_locations';
 
-/**
- * Fetch application profile for an authenticated Firebase UID
- * Maps to PostgreSQL schema: user_profiles
- */
 export async function getUserProfile(userId) {
   if (!userId) return null;
 
   try {
-    // Attempt Supabase fetch
     const { data, error } = await supabase
       .from('user_profiles')
       .select('*')
@@ -38,7 +19,6 @@ export async function getUserProfile(userId) {
       .single();
 
     if (!error && data) {
-      // Sync local cache
       setLocalProfileCache(userId, data);
       return data;
     }
@@ -46,13 +26,9 @@ export async function getUserProfile(userId) {
     console.warn('[Supabase Service] Falling back to local cache:', err?.message || err);
   }
 
-  // Resilient fallback to cached profile
   return getLocalProfileCache(userId);
 }
 
-/**
- * Upsert application profile in Supabase
- */
 export async function upsertUserProfile(userId, profileData) {
   if (!userId) return null;
 
@@ -67,7 +43,6 @@ export async function upsertUserProfile(userId, profileData) {
     updated_at: new Date().toISOString(),
   };
 
-  // Always update local cache immediately for zero-latency UI reactivity
   setLocalProfileCache(userId, payload);
 
   try {
@@ -87,9 +62,6 @@ export async function upsertUserProfile(userId, profileData) {
   return payload;
 }
 
-/**
- * Fetch saved locations for the user
- */
 export async function getSavedLocations(userId) {
   if (!userId) return [];
 
@@ -104,7 +76,6 @@ export async function getSavedLocations(userId) {
       return data;
     }
   } catch {
-    // Return cached locations
   }
 
   try {
@@ -118,9 +89,6 @@ export async function getSavedLocations(userId) {
   }
 }
 
-/**
- * Local cache helpers for resilient offline state
- */
 function getLocalProfileCache(userId) {
   try {
     const raw = localStorage.getItem(`${LOCAL_PROFILE_CACHE_KEY}_${userId}`);

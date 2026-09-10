@@ -1,10 +1,3 @@
-/**
- * test-auth-model.js
- * 
- * Automated verification suite for the 11 Acceptance Tests (Test A through Test K)
- * Validates the canonical LocalStorage persistence model, state machine, and route protection rules.
- */
-
 import {
   AUTH_KEYS,
   AUTH_STATES,
@@ -17,7 +10,6 @@ import {
   clearSession,
 } from './src/auth/authStorage.js';
 
-// Mock localStorage for Node environment
 class MockLocalStorage {
   constructor() {
     this.store = {};
@@ -36,9 +28,6 @@ class MockLocalStorage {
   }
 }
 
-/**
- * Pure route resolution function mirroring RootRoute, PublicOnlyRoute, PersonaRoute, and ProtectedRoute.
- */
 function resolveRoute(path, storage) {
   const state = getAuthState(storage);
 
@@ -124,7 +113,6 @@ console.log('===================================================================
   );
 }
 
-// Test C — Complete onboarding
 {
   const storage = new MockLocalStorage();
   setAuthenticatedUser({ name: 'Demo User', email: 'demo@example.com' }, storage);
@@ -145,13 +133,11 @@ console.log('===================================================================
   );
 }
 
-// Test D — Refresh persistence
 {
   const storage = new MockLocalStorage();
   setAuthenticatedUser({ name: 'Demo User', email: 'demo@example.com' }, storage);
   setPersona('health', storage);
 
-  // Re-read storage upon refresh
   const stateAfterRefresh = getAuthState(storage);
   const personaAfterRefresh = getActivePersona(storage);
   const routeAfterRefresh = resolveRoute('/dashboard', storage);
@@ -165,7 +151,6 @@ console.log('===================================================================
   );
 }
 
-// Test E — Returning user
 {
   const storage = new MockLocalStorage();
   storage.setItem(AUTH_KEYS.IS_LOGGED_IN, 'true');
@@ -173,7 +158,6 @@ console.log('===================================================================
   storage.setItem(AUTH_KEYS.USER_NAME, 'Demo User');
   storage.setItem(AUTH_KEYS.USER_EMAIL, 'demo@example.com');
 
-  // Returning user opening '/'
   const route = resolveRoute('/', storage);
   assert(
     route.redirect === '/dashboard' && getActivePersona(storage) === 'health',
@@ -182,18 +166,13 @@ console.log('===================================================================
   );
 }
 
-// Test F — Login with existing persona
 {
   const storage = new MockLocalStorage();
-  // Existing persona from previous session
   storage.setItem(AUTH_KEYS.ACTIVE_PERSONA, 'health');
-  // Logged out currently
   storage.removeItem(AUTH_KEYS.IS_LOGGED_IN);
 
-  // Login occurs
   const existingPersonaBefore = getActivePersona(storage);
   setAuthenticatedUser({ email: 'demo@example.com' }, storage);
-  // In Login, we do NOT overwrite activePersona!
   const personaAfterLogin = getActivePersona(storage);
   const state = getAuthState(storage);
   const targetRoute = personaAfterLogin ? '/dashboard' : '/persona';
@@ -208,10 +187,8 @@ console.log('===================================================================
   );
 }
 
-// Test G — Login without persona
 {
   const storage = new MockLocalStorage();
-  // Absent auth and absent persona
   setAuthenticatedUser({ email: 'demo@example.com' }, storage);
   const personaAfterLogin = getActivePersona(storage);
   const state = getAuthState(storage);
@@ -226,7 +203,6 @@ console.log('===================================================================
   );
 }
 
-// Test H — Persona cannot authenticate
 {
   const storage = new MockLocalStorage();
   storage.setItem(AUTH_KEYS.ACTIVE_PERSONA, 'health');
@@ -242,17 +218,14 @@ console.log('===================================================================
   );
 }
 
-// Test I — Logout
 {
   const storage = new MockLocalStorage();
   storage.setItem(AUTH_KEYS.IS_LOGGED_IN, 'true');
   storage.setItem(AUTH_KEYS.ACTIVE_PERSONA, 'health');
   storage.setItem(AUTH_KEYS.USER_NAME, 'Demo User');
   storage.setItem(AUTH_KEYS.USER_EMAIL, 'demo@example.com');
-  // Store unrelated mock data to ensure localStorage.clear() is NOT called
   storage.setItem('unrelated_theme_preference', 'dark');
 
-  // Perform logout
   clearSession(storage);
 
   const isAuthAfterLogout = storage.getItem(AUTH_KEYS.IS_LOGGED_IN);
@@ -276,7 +249,6 @@ console.log('===================================================================
   );
 }
 
-// Test J — Protected dashboard
 {
   const storage = new MockLocalStorage();
   storage.removeItem(AUTH_KEYS.IS_LOGGED_IN);
@@ -289,7 +261,6 @@ console.log('===================================================================
   );
 }
 
-// Test K — Protected persona
 {
   const storage = new MockLocalStorage();
   storage.setItem(AUTH_KEYS.IS_LOGGED_IN, 'true');

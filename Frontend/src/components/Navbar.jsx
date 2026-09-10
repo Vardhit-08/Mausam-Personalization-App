@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../auth/AuthContext';
-import { AUTH_STATES } from '../auth/authStorage';
+import { useAuth, AUTH_STATES } from '../auth/AuthContext';
 import ProfileModal from './ProfileModal';
 import imdLogo from '../assets/branding/imd-logo.png';
-import { User, LogOut, HeartPulse, Wheat, Activity, Compass, Car } from 'lucide-react';
+import { useTheme } from '../utils/themeManager';
+import { User, LogOut, HeartPulse, Wheat, Activity, Compass, Car, Sun, Moon } from 'lucide-react';
 
 export default function Navbar() {
   const { authState, currentUser, persona, logout } = useAuth();
   const [showProfile, setShowProfile] = useState(false);
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
-  const handleLogout = () => {
-    const target = logout();
+  const handleLogout = async () => {
+    const target = await logout();
     setShowProfile(false);
     navigate(target, { replace: true });
   };
@@ -67,12 +68,25 @@ export default function Navbar() {
           <Link to="/" className="brand-logo" id="nav-brand-logo">
             <img src={imdLogo} alt="IMD Mausam" className="nav-imd-logo" />
             <div className="brand-text-group">
-              <span className="brand-name">मौसम MAUSAM</span>
+              <span className="brand-name">{'\u092e\u094c\u0938\u092e'} MAUSAM</span>
               <span className="brand-tag">India Meteorological Department</span>
             </div>
           </Link>
 
           <nav className="header-nav">
+            {/* Accessible Theme Toggle Button */}
+            <button
+              type="button"
+              className="nav-theme-toggle-btn"
+              id="nav-theme-toggle-btn"
+              onClick={toggleTheme}
+              aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+              <span className="theme-toggle-label">{theme === 'dark' ? 'Light' : 'Dark'}</span>
+            </button>
+
             {isAuth ? (
               <div className="nav-auth-group">
                 {persona && getPersonaBadge(persona)}
@@ -88,7 +102,7 @@ export default function Navbar() {
                     <User size={16} />
                   </div>
                   <span className="nav-user-name">
-                    {currentUser.name || currentUser.email || 'My Account'}
+                    {currentUser?.displayName || currentUser?.name || currentUser?.email || 'My Account'}
                   </span>
                 </button>
 

@@ -1,11 +1,4 @@
-/**
- * PersonaSwitcher.jsx
- * 
- * Obvious and accessible persona selection tabs for SIH26076 Mausam.
- * Allows users to switch personas without having to leave the dashboard.
- */
-
-import React from 'react';
+﻿import React from 'react';
 import { PERSONAS } from '../services/personalizationEngine';
 
 export default function PersonaSwitcher({ activePersona, onSelectPersona }) {
@@ -22,7 +15,7 @@ export default function PersonaSwitcher({ activePersona, onSelectPersona }) {
       <div className="switcher-label-row">
         <span className="switcher-label">Active Persona:</span>
         <span className="switcher-description">
-          {PERSONAS[activePersona]?.shortDesc || 'Personalized weather intelligence'}
+          {PERSONAS[activePersona]?.shortDesc || 'Personalized meteorological guidance'}
         </span>
       </div>
 
