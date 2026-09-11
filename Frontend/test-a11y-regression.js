@@ -1,15 +1,3 @@
-/**
- * test-a11y-regression.js
- * 
- * Part 18 & 19: Accessibility & Full Regression Verification Suite
- * Validates:
- * 1. ARIA Dialog & Modal compliance on all interactive overlays
- * 2. Focus-visible and reduced-motion CSS rules in index.css
- * 3. ARIA roles and labels on switcher, toggles, drawers, and notifications
- * 4. High-contrast color palette compliance (WCAG AA)
- * 5. Full End-to-End User State Machine integration (Auth -> Persona -> City -> Mode -> Scenarios)
- */
-
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -34,7 +22,6 @@ console.log('\n====================================================');
 console.log('MAUSAM SIH26076 — ACCESSIBILITY & REGRESSION SUITE (PARTS 18 & 19)');
 console.log('====================================================\n');
 
-// GROUP 1: ARIA Dialog & Modal Contract Compliance
 console.log('TEST GROUP 1: ARIA Dialog & Modal Accessibility');
 const citySelectorCode = fs.readFileSync(path.join(__dirname, 'src/components/CitySelectorModal.jsx'), 'utf-8');
 const profileModalCode = fs.readFileSync(path.join(__dirname, 'src/components/ProfileModal.jsx'), 'utf-8');
@@ -54,7 +41,6 @@ assert(guidedTourCode.includes('role="dialog"'), 'GuidedTour floating card inclu
 assert(guidedTourCode.includes('aria-modal="true"'), 'GuidedTour includes aria-modal="true"');
 assert(guidedTourCode.includes('aria-labelledby="tour-dialog-title"'), 'GuidedTour has aria-labelledby');
 
-// GROUP 2: Switchers, Toggles & Expandable Drawers ARIA
 console.log('\nTEST GROUP 2: Component ARIA Attributes & Controls');
 const personaSwitcherCode = fs.readFileSync(path.join(__dirname, 'src/components/PersonaSwitcher.jsx'), 'utf-8');
 const modeToggleCode = fs.readFileSync(path.join(__dirname, 'src/components/ModeToggle.jsx'), 'utf-8');
@@ -78,7 +64,6 @@ assert(dynamicCardGridCode.includes('role="region"'), 'DynamicCardGrid why-drawe
 assert(notificationCenterCode.includes('aria-expanded={isOpen}'), 'NotificationCenter trigger has aria-expanded');
 assert(notificationCenterCode.includes('aria-haspopup="dialog"'), 'NotificationCenter trigger has aria-haspopup');
 
-// GROUP 3: CSS Focus-Visible & Reduced Motion Rules
 console.log('\nTEST GROUP 3: Design System Focus-Visible & Reduced-Motion Rules');
 const cssCode = fs.readFileSync(path.join(__dirname, 'src/index.css'), 'utf-8');
 
@@ -87,28 +72,24 @@ assert(cssCode.includes('outline: 2px solid'), 'Focus ring has clear 2px outline
 assert(cssCode.includes('@media (prefers-reduced-motion: reduce)'), 'Universal prefers-reduced-motion media query present');
 assert(cssCode.includes('overflow-x: hidden'), 'html, body, and page-wrapper guard against horizontal scroll');
 
-// GROUP 4: Full State Machine Integration (Persona, City, Mode, Alerts)
 console.log('\nTEST GROUP 4: End-to-End System State Machine Integration');
 import { generatePersonalizedDashboard, PERSONAS } from './src/services/personalizationEngine.js';
 import { CITIES_DATA } from './src/data/citiesData.js';
 import { calculateSweatRisk, calculateCommuteRisk } from './src/services/indicesCalculator.js';
 
-// Verify all 5 personas produce valid, complete synthesized dashboards
 const personaKeys = ['fitness', 'traveler', 'health', 'commuter', 'agriculture'];
 personaKeys.forEach((p) => {
-  const city = CITIES_DATA[0]; // Nanded
+  const city = CITIES_DATA[0];
   const data = generatePersonalizedDashboard({ persona: p, cityData: city });
   assert(data.insightCard && data.insightCard.title, `Persona "${p}" generates complete insight card`);
   assert(Array.isArray(data.prioritizedCards) && data.prioritizedCards.length > 0, `Persona "${p}" generates prioritized cards array`);
   assert(data.prioritizedCards.every(c => typeof c.relevance === 'number'), `Persona "${p}" all cards have valid numerical relevance score`);
 });
 
-// Verify City Switch Retains Calculation Integrity
 const delhiCity = CITIES_DATA.find(c => c.cityId === 'delhi');
 const fitnessDelhi = generatePersonalizedDashboard({ persona: 'fitness', cityData: delhiCity });
 assert(fitnessDelhi.insightCard && fitnessDelhi.insightCard.title, 'Data calculation accurately binds to switched city (Delhi)');
 
-// GROUP 5: Institutional Color System & Contrast
 console.log('\nTEST GROUP 5: Institutional Theme Integrity');
 assert(cssCode.includes('--imd-blue: #0068B7'), 'Official primary IMD blue token (#0068B7) present');
 assert(cssCode.includes('--bg-main: #061938'), 'Deep institutional blue background token (#061938) present');
