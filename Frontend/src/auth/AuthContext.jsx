@@ -9,7 +9,6 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import { auth } from '../firebase';
-import { upsertUserProfile } from '../services/supabase';
 
 export const AUTH_STATES = {
   LOGGED_OUT: 'LOGGED_OUT',
@@ -149,18 +148,6 @@ export function AuthProvider({ children }) {
     localStorage.setItem('activePersona', chosenPersona);
     setAuthState(AUTH_STATES.AUTHENTICATED);
 
-    if (auth.currentUser?.uid) {
-      try {
-        await upsertUserProfile(auth.currentUser.uid, {
-          name: auth.currentUser.displayName || auth.currentUser.email,
-          display_name: auth.currentUser.displayName,
-          persona: chosenPersona,
-        });
-      } catch (e) {
-        console.warn('[AuthContext] Supabase profile sync warning:', e?.message || e);
-      }
-    }
-
     return '/dashboard';
   }, []);
 
@@ -183,19 +170,11 @@ export function AuthProvider({ children }) {
         setCurrentUser({ ...auth.currentUser, name: trimmed, displayName: trimmed });
       }
 
-      if (auth.currentUser?.uid) {
-        await upsertUserProfile(auth.currentUser.uid, {
-          name: trimmed,
-          display_name: trimmed,
-          persona: persona,
-        });
-      }
-
       return { success: true };
     } catch (err) {
       return { success: false, error: formatAuthError(err) };
     }
-  }, [persona]);
+  }, []);
 
   const logout = useCallback(async () => {
     try {
