@@ -1,0 +1,151 @@
+{
+  "cityId": "jaipur",
+  "cityName": "Jaipur",
+  "state": "Rajasthan",
+  "coordinates": {
+    "lat": 26.91,
+    "lon": 75.79
+  },
+  "lastUpdated": "2026-09-06T21:30:00+05:30",
+  "current": {
+    "temperature": 33.4,
+    "feelsLike": 33.0,
+    "minTemp": 26.0,
+    "maxTemp": 36.5,
+    "humidity": 51,
+    "condition": "Partly Cloudy",
+    "conditionIcon": "partly-cloudy",
+    "wind": {
+      "speedKmh": 12.1,
+      "direction": "W"
+    },
+    "rain": {
+      "probability": 24,
+      "amountMm": 1.5
+    },
+    "airQuality": {
+      "aqi": 130,
+      "category": "Moderate",
+      "dominantPollutant": "PM2.5"
+    },
+    "pollen": {
+      "level": "Moderate",
+      "index": 6
+    },
+    "uvIndex": {
+      "value": 9,
+      "category": "Very High"
+    }
+  },
+  "sun": {
+    "sunrise": "06:13",
+    "sunset": "18:38"
+  },
+  "moon": {
+    "moonrise": "00:59",
+    "moonset": "14:55",
+    "phase": "Waning Gibbous"
+  },
+  "alerts": [
+    {
+      "type": "Heat Alert",
+      "severity": "amber",
+      "message": "Daytime temperatures in Jaipur are expected to remain significantly above normal.",
+      "issuedBy": "IMD Regional Meteorological Centre"
+    }
+  ],
+  "hourlyForecast": [
+    {
+      "date": "07 September",
+      "time": "11:30",
+      "temperature": 34.9,
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "rainProbability": 26,
+      "humidity": 46
+    },
+    {
+      "date": "07 September",
+      "time": "14:30",
+      "temperature": 34.1,
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "rainProbability": 22,
+      "humidity": 58
+    },
+    {
+      "date": "07 September",
+      "time": "17:30",
+      "temperature": 34.5,
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "rainProbability": 24,
+      "humidity": 47
+    }
+  ],
+  "dailyForecast": [
+    {
+      "date": "06/09",
+      "day": "Today",
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "minTemp": 25.9,
+      "maxTemp": 36.7,
+      "rainProbability": 29
+    },
+    {
+      "date": "07/09",
+      "day": "Sunday",
+      "condition": "Generally Cloudy",
+      "conditionIcon": "cloudy",
+      "minTemp": 25.9,
+      "maxTemp": 37.0,
+      "rainProbability": 40
+    },
+    {
+      "date": "08/09",
+      "day": "Monday",
+      "condition": "Partly Cloudy",
+      "conditionIcon": "partly-cloudy",
+      "minTemp": 26.8,
+      "maxTemp": 37.4,
+      "rainProbability": 36
+    },
+    {
+      "date": "09/09",
+      "day": "Tuesday",
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "minTemp": 25.2,
+      "maxTemp": 36.5,
+      "rainProbability": 17
+    },
+    {
+      "date": "10/09",
+      "day": "Wednesday",
+      "condition": "Haze",
+      "conditionIcon": "mist",
+      "minTemp": 26.6,
+      "maxTemp": 37.3,
+      "rainProbability": 22
+    },
+    {
+      "date": "11/09",
+      "day": "Thursday",
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "minTemp": 26.6,
+      "maxTemp": 35.4,
+      "rainProbability": 22
+    },
+    {
+      "date": "12/09",
+      "day": "Friday",
+      "condition": "Clear Sky",
+      "conditionIcon": "clear-sky",
+      "minTemp": 27.0,
+      "maxTemp": 36.8,
+      "rainProbability": 29
+    }
+  ]
+}

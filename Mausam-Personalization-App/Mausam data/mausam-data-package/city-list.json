@@ -1,0 +1,77 @@
+[
+  {
+    "cityId": "nanded",
+    "cityName": "Nanded",
+    "state": "Maharashtra"
+  },
+  {
+    "cityId": "mumbai",
+    "cityName": "Mumbai",
+    "state": "Maharashtra"
+  },
+  {
+    "cityId": "pune",
+    "cityName": "Pune",
+    "state": "Maharashtra"
+  },
+  {
+    "cityId": "delhi",
+    "cityName": "Delhi",
+    "state": "Delhi"
+  },
+  {
+    "cityId": "bengaluru",
+    "cityName": "Bengaluru",
+    "state": "Karnataka"
+  },
+  {
+    "cityId": "hyderabad",
+    "cityName": "Hyderabad",
+    "state": "Telangana"
+  },
+  {
+    "cityId": "chennai",
+    "cityName": "Chennai",
+    "state": "Tamil Nadu"
+  },
+  {
+    "cityId": "kolkata",
+    "cityName": "Kolkata",
+    "state": "West Bengal"
+  },
+  {
+    "cityId": "ahmedabad",
+    "cityName": "Ahmedabad",
+    "state": "Gujarat"
+  },
+  {
+    "cityId": "jaipur",
+    "cityName": "Jaipur",
+    "state": "Rajasthan"
+  },
+  {
+    "cityId": "lucknow",
+    "cityName": "Lucknow",
+    "state": "Uttar Pradesh"
+  },
+  {
+    "cityId": "bhopal",
+    "cityName": "Bhopal",
+    "state": "Madhya Pradesh"
+  },
+  {
+    "cityId": "nagpur",
+    "cityName": "Nagpur",
+    "state": "Maharashtra"
+  },
+  {
+    "cityId": "srinagar",
+    "cityName": "Srinagar",
+    "state": "Jammu and Kashmir"
+  },
+  {
+    "cityId": "guwahati",
+    "cityName": "Guwahati",
+    "state": "Assam"
+  }
+]
