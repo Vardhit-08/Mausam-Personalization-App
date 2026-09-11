@@ -2629,32 +2629,21 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  color: #e2e8f0;
+  color: var(--text-muted);
   font-size: 0.78rem;
-  font-weight: 600;
-  padding: 0.28rem 0.65rem;
+  font-weight: 500;
+  padding: 0.25rem 0.6rem;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .btn-why-trigger:hover {
   color: #ffffff;
-  border-color: rgba(56, 189, 248, 0.5);
-  background: rgba(56, 189, 248, 0.15);
-}
-
-.btn-why-trigger[aria-expanded="true"] {
-  background: rgba(0, 104, 183, 0.25);
-  border-color: #38bdf8;
-  color: #38bdf8;
-}
-
-.btn-why-trigger:focus-visible {
-  outline: 2px solid #38bdf8;
-  outline-offset: 2px;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .insight-main-title {
@@ -2949,63 +2938,37 @@ a:hover {
   margin-top: 0.25rem;
 }
 
-.card-footer-action,
 .card-why-section {
   border-top: 1px solid var(--border-subtle);
   padding-top: 0.65rem;
   margin-top: auto;
-  display: flex;
-  align-items: center;
 }
 
 .btn-card-why {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-sm);
-  color: #cbd5e1;
-  font-size: 0.76rem;
-  font-weight: 600;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   cursor: pointer;
-  padding: 0.25rem 0.55rem;
-  transition: all var(--transition-fast);
+  padding: 0;
 }
 
 .btn-card-why:hover {
   color: #ffffff;
-  border-color: rgba(56, 189, 248, 0.5);
-  background: rgba(56, 189, 248, 0.15);
 }
 
-.btn-card-why[aria-expanded="true"] {
-  background: rgba(0, 104, 183, 0.25);
-  border-color: #38bdf8;
-  color: #38bdf8;
-}
-
-.btn-card-why:focus-visible {
-  outline: 2px solid #38bdf8;
-  outline-offset: 2px;
-}
-
-.card-why-drawer,
 .card-why-text {
   font-size: 0.78rem;
   color: var(--text-secondary);
-  line-height: 1.45;
-  margin-top: 0.45rem;
+  line-height: 1.4;
+  margin-top: 0.4rem;
   background: var(--bg-surface-elevated);
-  border: 1px solid var(--border-subtle);
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius-sm);
-}
-
-.card-why-drawer p,
-.card-why-text p {
-  margin: 0;
-  color: inherit;
 }
 
 /* Hourly Condition Timeline */
@@ -3360,35 +3323,23 @@ a:hover {
 }
 
 .station-selector-trigger {
-  background: rgba(11, 37, 69, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-full);
-  padding: 0.3rem 0.85rem;
-  color: #f1f5f9;
+  padding: 0.25rem 0.75rem;
+  color: var(--text-secondary);
   font-size: 0.85rem;
-  font-weight: 500;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   cursor: pointer;
   transition: all var(--transition-fast);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
 }
 
 .station-selector-trigger:hover {
-  background: rgba(0, 104, 183, 0.35);
-  border-color: #38bdf8;
+  background: rgba(0, 104, 183, 0.2);
+  border-color: var(--imd-blue-light);
   color: #ffffff;
-}
-
-.station-selector-trigger:focus-visible {
-  outline: 2px solid #38bdf8;
-  outline-offset: 2px;
-}
-
-.station-selector-trigger .inline-icon.text-accent,
-.text-accent {
-  color: #38bdf8;
 }
 
 .station-pill-tag {
@@ -3396,11 +3347,10 @@ a:hover {
   color: #ffffff;
   font-size: 0.68rem;
   font-weight: 700;
-  padding: 0.12rem 0.5rem;
+  padding: 0.1rem 0.45rem;
   border-radius: var(--radius-full);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin-left: 0.25rem;
 }
 
 .station-update-meta {
@@ -5234,85 +5184,9 @@ a:hover {
   color: #0f172a;
 }
 
-/* Light Mode Target Fixes: station-selector-trigger, btn-why-trigger, btn-card-why */
 [data-theme=light] .station-selector-trigger {
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  color: #0f172a;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme=light] .station-selector-trigger:hover {
-  background: #f0f7ff;
-  border-color: #0068B7;
-  color: #0068B7;
-}
-
-[data-theme=light] .station-selector-trigger:focus-visible {
-  outline: 2px solid #0068B7;
-  outline-offset: 2px;
-}
-
-[data-theme=light] .station-selector-trigger .inline-icon.text-accent,
-[data-theme=light] .text-accent {
-  color: #0068B7;
-}
-
-[data-theme=light] .station-pill-tag {
-  background: #0068B7;
-  color: #ffffff;
-}
-
-[data-theme=light] .btn-why-trigger {
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  color: #0f172a;
-}
-
-[data-theme=light] .btn-why-trigger:hover {
-  background: rgba(0, 104, 183, 0.1);
-  border-color: #0068B7;
-  color: #0068B7;
-}
-
-[data-theme=light] .btn-why-trigger[aria-expanded="true"] {
-  background: rgba(0, 104, 183, 0.12);
-  border-color: #0068B7;
-  color: #0068B7;
-}
-
-[data-theme=light] .btn-why-trigger:focus-visible {
-  outline: 2px solid #0068B7;
-  outline-offset: 2px;
-}
-
-[data-theme=light] .btn-card-why {
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  color: #1e293b;
-}
-
-[data-theme=light] .btn-card-why:hover {
-  background: rgba(0, 104, 183, 0.1);
-  border-color: #0068B7;
-  color: #0068B7;
-}
-
-[data-theme=light] .btn-card-why[aria-expanded="true"] {
-  background: rgba(0, 104, 183, 0.12);
-  border-color: #0068B7;
-  color: #0068B7;
-}
-
-[data-theme=light] .btn-card-why:focus-visible {
-  outline: 2px solid #0068B7;
-  outline-offset: 2px;
-}
-
-[data-theme=light] .card-why-drawer {
   background: #f8fafc;
   border: 1px solid #cbd5e1;
-  color: #0f172a;
 }
 [data-theme=light] .station-name-btn {
   color: #0f172a;
