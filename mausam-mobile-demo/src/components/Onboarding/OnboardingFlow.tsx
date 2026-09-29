@@ -14,7 +14,6 @@ import {
   EyeOff,
   User,
   Phone,
-  Layout,
   Check,
   Sliders,
   LayoutDashboard,
@@ -85,7 +84,7 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
 
   // Dashboard setup choice
   const [dashboardSetupOption, setDashboardSetupOption] = useState<
-    'recommended' | 'customize' | 'custom'
+    'recommended' | 'customize'
   >('recommended');
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
   const [customizerConfig, setCustomizerConfig] = useState<DashboardConfig | null>(null);
@@ -230,14 +229,9 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
       const config = createDefaultDashboardConfig(effectivePersona, 'recommended');
       updateUserProfile({ hasCompletedOnboarding: true });
       onFinish({ name, phone, cityId }, selectedPersonas, 'home', config);
-    } else if (dashboardSetupOption === 'customize') {
+    } else {
       // Option 2: Pre-populate with recommended and open customizer
       const config = createDefaultDashboardConfig(effectivePersona, 'customize');
-      setCustomizerConfig(config);
-      setIsCustomizerOpen(true);
-    } else {
-      // Option 3: Clean builder starting with []
-      const config = createDefaultDashboardConfig(effectivePersona, 'custom');
       setCustomizerConfig(config);
       setIsCustomizerOpen(true);
     }
@@ -1696,79 +1690,6 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
               />
             )}
           </div>
-
-          {/* Option 3: Build My Own Dashboard */}
-          <div
-            onClick={() => setDashboardSetupOption('custom')}
-            style={{
-              padding: '10px 12px',
-              borderRadius: '10px',
-              background: dashboardSetupOption === 'custom' ? '#f0f9ff' : '#ffffff',
-              border:
-                dashboardSetupOption === 'custom'
-                  ? '2px solid #0284c7'
-                  : '1px solid var(--border-light)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              transition: 'all 0.15s ease',
-              boxShadow:
-                dashboardSetupOption === 'custom'
-                  ? '0 2px 6px rgba(2,132,199,0.1)'
-                  : '0 1px 2px rgba(0,0,0,0.03)',
-            }}
-          >
-            <div
-              style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '8px',
-                background: '#f3e8ff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              <Layout size={18} color="#7c3aed" />
-            </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div
-                style={{
-                  fontSize: '0.86rem',
-                  fontWeight: 800,
-                  color: 'var(--text-main)',
-                  lineHeight: 1.2,
-                }}
-              >
-                3. Build My Own Dashboard
-              </div>
-              <p
-                style={{
-                  fontSize: '0.72rem',
-                  color: 'var(--text-muted)',
-                  marginTop: '2px',
-                  lineHeight: 1.35,
-                }}
-              >
-                Create a dashboard using the information you need.
-              </p>
-            </div>
-            {dashboardSetupOption === 'custom' ? (
-              <Check size={18} color="#0284c7" style={{ flexShrink: 0 }} />
-            ) : (
-              <div
-                style={{
-                  width: '18px',
-                  height: '18px',
-                  borderRadius: '50%',
-                  border: '1.5px solid #cbd5e1',
-                  flexShrink: 0,
-                }}
-              />
-            )}
-          </div>
         </div>
       </div>
 
@@ -1805,9 +1726,7 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
           <span>
             {dashboardSetupOption === 'recommended'
               ? 'Use Recommended'
-              : dashboardSetupOption === 'customize'
-              ? 'Customize Dashboard'
-              : 'Build My Own'}
+              : 'Customize Dashboard'}
           </span>
           <ArrowRight size={16} />
         </button>
